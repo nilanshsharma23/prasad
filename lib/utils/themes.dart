@@ -28,9 +28,10 @@ class Themes {
     surface: lightBackground,
     error: Color(0xFFB00020),
     onPrimary: Colors.white,
-    onSecondary: Colors.white,
+    onSecondary: lightTextSecondary,
     onSurface: lightTextPrimary,
     outline: lightBorder,
+    surfaceContainer: lightCardBackground,
   );
 
   static ColorScheme darkColors = ColorScheme.dark(
@@ -40,8 +41,9 @@ class Themes {
     surface: darkBackground,
     error: Color(0xFFCF6679),
     onPrimary: Color(0xFF1A1A1A),
-    onSecondary: Colors.white,
+    onSecondary: darkTextSecondary,
     onSurface: darkTextPrimary,
     outline: darkBorder,
+    surfaceContainer: darkCardBackground,
   );
 }

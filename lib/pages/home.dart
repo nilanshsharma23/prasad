@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:prasad/utils/widgets/status_container.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -8,18 +9,56 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: SizedBox(
+        title: SvgPicture.asset(
+          'assets/images/logo_white.svg',
+          semanticsLabel: "Prasad Logo",
           width: 128,
-          child: SvgPicture.asset(
-            'assets/images/logo_white.svg',
-            semanticsLabel: "Prasad Logo",
-            colorFilter: ColorFilter.mode(
-              Theme.of(context).colorScheme.primary,
-              BlendMode.srcIn,
-            ),
+          colorFilter: ColorFilter.mode(
+            Theme.of(context).colorScheme.primary,
+            BlendMode.srcIn,
           ),
         ),
-        actions: [],
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.settings_outlined),
+            color: Theme.of(context).colorScheme.onSecondary,
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsetsGeometry.all(32),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 32,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  StatusContainer(
+                    primaryColor: Theme.of(context).colorScheme.primary,
+                    status: "10",
+                    subtext: "Nearby",
+                  ),
+                  StatusContainer(
+                    primaryColor: Theme.of(context).colorScheme.secondary,
+                    status: "1.0km",
+                    subtext: "Nearest",
+                  ),
+                ],
+              ),
+              Text(
+                "Nearby Bhandaras",
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
