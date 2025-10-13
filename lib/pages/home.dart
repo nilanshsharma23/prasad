@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:prasad/utils/classes/listing_object.dart';
+import 'package:prasad/utils/widgets/listing_container.dart';
 import 'package:prasad/utils/widgets/status_container.dart';
 
 class HomePage extends StatelessWidget {
@@ -54,6 +56,14 @@ class HomePage extends StatelessWidget {
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+              ListingContainer(
+                listingObject: ListingObject(
+                  location: "Raj Nagar, Ghaziabad",
+                  date: "Today",
+                  time: "9:00AM - 5:00PM",
+                  people: "100+",
                 ),
               ),
             ],
