@@ -19,14 +19,10 @@ void onDestinationSelected(BuildContext context, {required int index}) {
 int calculateSelectedIndex(BuildContext context) {
   final String location = GoRouterState.of(context).uri.path;
 
-  if (location.startsWith('/')) {
-    if (location == '/host') {
-      return 1;
-    } else if (location == '/profile') {
-      return 2;
-    } else {
-      return 0;
-    }
+  if (location == '/host') {
+    return 1;
+  } else if (location == '/profile') {
+    return 2;
   } else {
     return 0;
   }

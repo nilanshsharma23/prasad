@@ -15,10 +15,7 @@ class MainNavigationBar extends StatelessWidget {
     return NavigationBar(
       onDestinationSelected: onDestinationSelected,
       indicatorColor: Theme.of(context).colorScheme.onSurface,
-      indicatorShape: RoundedRectangleBorder(
-        borderRadius: BorderRadiusGeometry.circular(8),
-      ),
-      height: 48,
+      selectedIndex: selectedIndex,
       destinations: [
         NavigationDestination(
           icon: Icon(Icons.home_outlined),
