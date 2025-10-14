@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class ColorSchemes {
   // Light Mode Colors
@@ -46,4 +47,13 @@ class ColorSchemes {
     outline: darkBorder,
     surfaceContainer: darkCardBackground,
   );
+
+  static List<ColorScheme> colorSchemeList = [
+    SchedulerBinding.instance.platformDispatcher.platformBrightness ==
+            Brightness.dark
+        ? ColorSchemes.darkColors
+        : ColorSchemes.lightColors,
+    lightColors,
+    darkColors,
+  ];
 }
