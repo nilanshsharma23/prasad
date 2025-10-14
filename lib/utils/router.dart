@@ -1,6 +1,45 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:prasad/pages/home.dart';
+import 'package:prasad/pages/host.dart';
+import 'package:prasad/pages/profile.dart';
+import 'package:prasad/pages/settings.dart';
+import 'package:prasad/utils/widgets/navigation/navigation_scaffold.dart';
+
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(
+  debugLabel: 'root',
+);
+final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>(
+  debugLabel: 'shell',
+);
 
 final router = GoRouter(
-  routes: [GoRoute(path: '/', builder: (context, state) => HomePage())],
+  navigatorKey: rootNavigatorKey,
+  debugLogDiagnostics: true,
+  routes: [
+    ShellRoute(
+      navigatorKey: shellNavigatorKey,
+      builder: (context, state, child) {
+        return NavigationScaffold(child: child);
+      },
+      routes: [
+        GoRoute(
+          parentNavigatorKey: shellNavigatorKey,
+          path: '/',
+          builder: (context, state) => HomePage(),
+        ),
+        GoRoute(
+          parentNavigatorKey: shellNavigatorKey,
+          path: '/host',
+          builder: (context, state) => HostPage(),
+        ),
+        GoRoute(
+          parentNavigatorKey: shellNavigatorKey,
+          path: '/profile',
+          builder: (context, state) => ProfilePage(),
+        ),
+      ],
+    ),
+    GoRoute(path: '/settings', builder: (context, state) => SettingsPage()),
+  ],
 );

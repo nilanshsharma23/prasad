@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Themes {
+class ColorSchemes {
   // Light Mode Colors
   static const Color lightPrimary = Color(0xFFFF9933);
   static const Color lightSecondary = Color(0xFF138808);
