@@ -200,6 +200,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.5.4"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.20.2"
   json_annotation:
     dependency: transitive
     description:
@@ -373,6 +381,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.6"
+  time_range:
+    dependency: "direct main"
+    description:
+      name: time_range
+      sha256: "1ee8879eea0e0cee2ce47319b6f18707499f6ea4f7dd58cbb91ca18f145bfe55"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   typed_data:
     dependency: transitive
     description:
