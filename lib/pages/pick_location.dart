@@ -32,6 +32,18 @@ class _PickLocationPageState extends State<PickLocationPage> {
           Navigator.pop(context);
         },
         userAgent: 'Prasad/1.0.0 (piescrap23@gmail.com)',
+        selectButtonConfiguration: SelectButtonConfiguration(
+          selectedLocationButtonTextStyle: TextStyle(
+            fontSize: 16,
+            color: Theme.of(context).colorScheme.onPrimary,
+          ),
+          selectLocationButtonStyle: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusGeometry.circular(8),
+            ),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+          ),
+        ),
       ),
     );
   }
