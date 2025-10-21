@@ -17,7 +17,7 @@ class SignInBarrierScreen extends StatelessWidget {
         barrierText: "You need to sign in to access this feature.",
         buttonText: "Sign In",
         onButtonPressed: () {
-          context.go('/sign-in');
+          context.push('/sign-in');
         },
       );
     }
