@@ -4,6 +4,7 @@ import 'package:prasad/pages/home.dart';
 import 'package:prasad/pages/host.dart';
 import 'package:prasad/pages/profile.dart';
 import 'package:prasad/pages/settings.dart';
+import 'package:prasad/pages/sign_in_page.dart';
 import 'package:prasad/utils/widgets/navigation/navigation_scaffold.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(
@@ -41,5 +42,6 @@ final router = GoRouter(
       ],
     ),
     GoRoute(path: '/settings', builder: (context, state) => SettingsPage()),
+    GoRoute(path: '/sign-in', builder: (context, state) => SignInPage()),
   ],
 );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:location/location.dart';
-import 'package:prasad/utils/widgets/barrier_screen.dart';
+import 'package:prasad/utils/widgets/barriers/barrier_screen.dart';
 
 class LocationPermissionScreen extends StatefulWidget {
   const LocationPermissionScreen({super.key, required this.child});

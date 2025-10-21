@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:location/location.dart';
 import 'package:prasad/utils/classes/listing_object.dart';
 import 'package:prasad/utils/widgets/listing_container.dart';
-import 'package:prasad/utils/widgets/location_permission_screen.dart';
+import 'package:prasad/utils/widgets/barriers/location_permission_screen.dart';
 import 'package:prasad/utils/widgets/status_container.dart';
 
 class HomePage extends StatefulWidget {
