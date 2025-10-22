@@ -26,13 +26,13 @@ class _SignInPageState extends State<SignInPage> {
     return Scaffold(
       body: Stack(
         children: [
-          PageView(
-            controller: pageController,
-            physics: NeverScrollableScrollPhysics(),
-            children: [
-              Padding(
-                padding: EdgeInsetsGeometry.all(32),
-                child: Form(
+          Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: PageView(
+              controller: pageController,
+              physics: NeverScrollableScrollPhysics(),
+              children: [
+                Form(
                   key: formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -111,10 +111,7 @@ class _SignInPageState extends State<SignInPage> {
                     ],
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsetsGeometry.all(32),
-                child: Column(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: 16,
@@ -170,8 +167,8 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           if (loading)
             Center(
