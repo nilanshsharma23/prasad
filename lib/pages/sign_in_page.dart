@@ -152,11 +152,22 @@ class _SignInPageState extends State<SignInPage> {
 
                           Globals.currentUser = response.user;
 
-                          pageController.animateToPage(
-                            2,
-                            duration: Durations.medium1,
-                            curve: Curves.bounceInOut,
-                          );
+                          final data = await Globals.supabase
+                              .from('users')
+                              .select()
+                              .eq('user_id', response.user!.id);
+
+                          if (data.isNotEmpty) {
+                            if (context.mounted) {
+                              context.go('/');
+                            }
+                          } else {
+                            pageController.animateToPage(
+                              2,
+                              duration: Durations.medium1,
+                              curve: Curves.bounceInOut,
+                            );
+                          }
                         } catch (e) {
                           if (context.mounted) {
                             showErrorDialog(context, e.toString());
