@@ -14,10 +14,13 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> phoneNumberFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> nameFormKey = GlobalKey<FormState>();
+
   PageController pageController = PageController();
 
   TextEditingController mobileNumberController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
 
   bool loading = false;
 
@@ -33,7 +36,7 @@ class _SignInPageState extends State<SignInPage> {
               physics: NeverScrollableScrollPhysics(),
               children: [
                 Form(
-                  key: formKey,
+                  key: phoneNumberFormKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +74,7 @@ class _SignInPageState extends State<SignInPage> {
                         width: double.infinity,
                         child: TextButton(
                           onPressed: () async {
-                            if (formKey.currentState!.validate()) {
+                            if (phoneNumberFormKey.currentState!.validate()) {
                               setState(() {
                                 loading = true;
                               });
@@ -148,15 +151,21 @@ class _SignInPageState extends State<SignInPage> {
                               );
 
                           Globals.currentUser = response.user;
+
+                          pageController.animateToPage(
+                            2,
+                            duration: Durations.medium1,
+                            curve: Curves.bounceInOut,
+                          );
                         } catch (e) {
                           if (context.mounted) {
                             showErrorDialog(context, e.toString());
                           }
                         }
 
-                        if (context.mounted) {
-                          context.go("/");
-                        }
+                        setState(() {
+                          loading = false;
+                        });
                       },
                       numberOfFields: 6,
                       showFieldAsBox: true,
@@ -166,6 +175,75 @@ class _SignInPageState extends State<SignInPage> {
                       fieldWidth: 48,
                     ),
                   ],
+                ),
+                Form(
+                  key: nameFormKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 16,
+                    children: [
+                      Text(
+                        "Complete Profile",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 32,
+                        ),
+                      ),
+                      TextFormField(
+                        controller: nameController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          labelText: "Enter Your Name",
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please Enter Something";
+                          }
+
+                          return null;
+                        },
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: TextButton(
+                          onPressed: () async {
+                            if (phoneNumberFormKey.currentState!.validate()) {
+                              setState(() {
+                                loading = true;
+                              });
+
+                              await Globals.supabase.from('users').insert({
+                                "user_id": Globals.currentUser!.id,
+                                "name": nameController.text,
+                              });
+
+                              if (context.mounted) {
+                                context.go("/");
+                              }
+                            }
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor: Theme.of(
+                              context,
+                            ).colorScheme.primary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(8),
+                            ),
+                          ),
+                          child: Text(
+                            "Continue",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
