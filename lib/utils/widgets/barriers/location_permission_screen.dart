@@ -28,8 +28,7 @@ class _LocationPermissionScreenState extends State<LocationPermissionScreen> {
     return FutureBuilder(
       future: locationPermissionStatus,
       builder: (context, asyncSnapshot) {
-        if (asyncSnapshot.connectionState == ConnectionState.done &&
-            asyncSnapshot.hasData) {
+        if (asyncSnapshot.hasData) {
           if (asyncSnapshot.data! == PermissionStatus.granted) {
             return widget.child;
           } else {
