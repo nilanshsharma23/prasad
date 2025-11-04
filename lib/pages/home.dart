@@ -1,10 +1,13 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_map_math/flutter_geo_math.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:location/location.dart';
-import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
-import 'package:prasad/utils/classes/listing_object.dart';
-import 'package:prasad/utils/enums/status_enum.dart';
+import 'package:prasad/utils/classes/globals.dart';
+import 'package:prasad/utils/functions/get_listings_nearby.dart';
 import 'package:prasad/utils/widgets/listing_container.dart';
 import 'package:prasad/utils/widgets/barriers/location_permission_screen.dart';
 import 'package:prasad/utils/widgets/status_container.dart';
@@ -51,47 +54,72 @@ class _HomePageState extends State<HomePage> {
       body: LocationPermissionScreen(
         child: Padding(
           padding: EdgeInsetsGeometry.all(32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 32,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  StatusContainer(
-                    primaryColor: Theme.of(context).colorScheme.primary,
-                    status: "10",
-                    subtext: "Nearby",
+          child: FutureBuilder(
+            future: getListingsNearby(distanceInKm: 2),
+            builder: (context, asyncSnapshot) {
+              if (asyncSnapshot.hasData) {
+                List<double> distances = List.generate(
+                  asyncSnapshot.data!.length,
+                  (index) {
+                    return FlutterMapMath.distanceBetween(
+                      Globals.currentLocation!.latitude!,
+                      Globals.currentLocation!.longitude!,
+                      asyncSnapshot.data![index].latLong.latitude,
+                      asyncSnapshot.data![index].latLong.longitude,
+                      "kilometers",
+                    );
+                  },
+                );
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 32,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        StatusContainer(
+                          primaryColor: Theme.of(context).colorScheme.primary,
+                          status: asyncSnapshot.data!.length.toString(),
+                          subtext: "Nearby",
+                        ),
+                        StatusContainer(
+                          primaryColor: Theme.of(context).colorScheme.secondary,
+                          status:
+                              "${distances.reduce(min).toStringAsFixed(2)}km",
+                          subtext: "Nearest",
+                        ),
+                      ],
+                    ),
+                    Text(
+                      "Nearby Bhandaras",
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
+                    Column(
+                      spacing: 32,
+                      children: List.generate(asyncSnapshot.data!.length, (
+                        index,
+                      ) {
+                        return ListingContainer(
+                          listingObject: asyncSnapshot.data![index],
+                        );
+                      }),
+                    ),
+                  ],
+                );
+              } else {
+                return Center(
+                  child: SpinKitThreeBounce(
+                    size: 32,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
-                  StatusContainer(
-                    primaryColor: Theme.of(context).colorScheme.secondary,
-                    status: "1.0km",
-                    subtext: "Nearest",
-                  ),
-                ],
-              ),
-              Text(
-                "Nearby Bhandaras",
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-              ),
-              ListingContainer(
-                listingObject: ListingObject(
-                  address: "Raj Nagar, Ghaziabad",
-                  date: DateTime(2025, 12, 2),
-                  from: TimeOfDay(hour: 0, minute: 5),
-                  to: TimeOfDay(hour: 5, minute: 0),
-                  uid: "",
-                  host: "",
-                  latLong: LatLong(40.7128, -74.0060),
-                  status: Status.accepted,
-                  people: 100,
-                ),
-              ),
-            ],
+                );
+              }
+            },
           ),
         ),
       ),
