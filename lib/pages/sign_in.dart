@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
+import 'package:otp_autofill/otp_autofill.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/functions/show_error_dialog.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -21,6 +22,8 @@ class _SignInPageState extends State<SignInPage> {
 
   TextEditingController mobileNumberController = TextEditingController();
   TextEditingController nameController = TextEditingController();
+
+  late OTPTextEditController controller;
 
   bool loading = false;
 
@@ -86,6 +89,15 @@ class _SignInPageState extends State<SignInPage> {
                               setState(() {
                                 loading = false;
                               });
+
+                              controller =
+                                  OTPTextEditController(
+                                    codeLength: 6,
+                                    onCodeReceive: (code) {},
+                                  )..startListenUserConsent((code) {
+                                    final exp = RegExp(r'(\d{6})');
+                                    return exp.stringMatch(code ?? '') ?? '';
+                                  });
 
                               pageController.animateToPage(
                                 1,

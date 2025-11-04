@@ -712,6 +712,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
+  maps_launcher:
+    dependency: "direct main"
+    description:
+      name: maps_launcher
+      sha256: dac4c609720211fa6336b5903d917fe45e545c6b5665978efc3db2a3f436b1ae
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0+1"
   matcher:
     dependency: transitive
     description:
@@ -768,6 +776,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  otp_autofill:
+    dependency: "direct main"
+    description:
+      name: otp_autofill
+      sha256: "081a8366475db40c44f0582a34a779dbda0f54ac1f40a9b99dcd4b4546f025c2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.0"
   package_info_plus:
     dependency: transitive
     description:

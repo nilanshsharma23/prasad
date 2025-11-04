@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/classes/listing_object.dart';
 import 'package:prasad/utils/functions/get_status_color.dart';
@@ -92,7 +92,8 @@ class ListingContainer extends StatelessWidget {
                 ),
               ],
             ),
-            if (listingObject.host == Globals.supabase.auth.currentUser!.id)
+            if (Globals.supabase.auth.currentUser != null &&
+                listingObject.host == Globals.supabase.auth.currentUser!.id)
               Row(
                 children: [
                   Text(
@@ -112,30 +113,32 @@ class ListingContainer extends StatelessWidget {
                   ),
                 ],
               ),
-            if (listingObject.host != Globals.supabase.auth.currentUser!.id)
-              TextButton(
-                onPressed: () {
-                  context.go('/listing-created');
-                },
-                style: TextButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadiusGeometry.circular(8),
-                  ),
+            TextButton(
+              onPressed: () {
+                MapsLauncher.launchCoordinates(
+                  listingObject.latLong.latitude,
+                  listingObject.latLong.longitude,
+                );
+              },
+              style: TextButton.styleFrom(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusGeometry.circular(8),
                 ),
+              ),
 
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    "Take Me There",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
+              child: SizedBox(
+                width: double.infinity,
+                child: Text(
+                  "Take Me There",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Theme.of(context).colorScheme.onPrimary,
                   ),
                 ),
               ),
+            ),
           ],
         ),
       ),
