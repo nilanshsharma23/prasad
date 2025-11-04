@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
+import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/classes/listing_object.dart';
+import 'package:prasad/utils/functions/get_status_color.dart';
 
 class ListingContainer extends StatelessWidget {
   const ListingContainer({super.key, required this.listingObject});
@@ -28,7 +32,9 @@ class ListingContainer extends StatelessWidget {
                   size: 32,
                 ),
                 Text(
-                  listingObject.location,
+                  listingObject.address,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -45,7 +51,7 @@ class ListingContainer extends StatelessWidget {
                       size: 16,
                     ),
                     Text(
-                      listingObject.date,
+                      DateFormat.Md().format(listingObject.date),
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.onSecondary,
                       ),
@@ -61,7 +67,7 @@ class ListingContainer extends StatelessWidget {
                       size: 16,
                     ),
                     Text(
-                      listingObject.time,
+                      "${MaterialLocalizations.of(context).formatTimeOfDay(listingObject.from)} - ${MaterialLocalizations.of(context).formatTimeOfDay(listingObject.to)}",
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.onSecondary,
                       ),
@@ -77,7 +83,7 @@ class ListingContainer extends StatelessWidget {
                       size: 16,
                     ),
                     Text(
-                      listingObject.people,
+                      "${listingObject.people}+",
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.onSecondary,
                       ),
@@ -86,26 +92,50 @@ class ListingContainer extends StatelessWidget {
                 ),
               ],
             ),
-            TextButton(
-              onPressed: () {},
-              style: TextButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadiusGeometry.circular(8),
-                ),
+            if (listingObject.host == Globals.supabase.auth.currentUser!.id)
+              Row(
+                children: [
+                  Text(
+                    "Status: ",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    listingObject.status.label,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: getStatusColor(
+                        context,
+                        status: listingObject.status,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              child: SizedBox(
-                width: double.infinity,
-                child: Text(
-                  "Take Me There",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Theme.of(context).colorScheme.onPrimary,
+            if (listingObject.host != Globals.supabase.auth.currentUser!.id)
+              TextButton(
+                onPressed: () {
+                  context.go('/listing-created');
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadiusGeometry.circular(8),
+                  ),
+                ),
+
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    "Take Me There",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),

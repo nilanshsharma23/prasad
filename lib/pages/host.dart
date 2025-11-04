@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
@@ -355,6 +356,8 @@ class _HostPageState extends State<HostPage> {
                                       'people': int.parse(
                                         noOfPeopleController.text,
                                       ),
+                                      'address':
+                                          "${pickedLocationData!.addressData['suburb']}, ${pickedLocationData!.addressData['city']}",
                                     })
                                     .select('host, uid')
                                     .single();
@@ -365,6 +368,10 @@ class _HostPageState extends State<HostPage> {
                                       '${data['host']}/${data['uid']}.webp',
                                       uploadedProof!,
                                     );
+
+                                if (context.mounted) {
+                                  context.go('/listing-created');
+                                }
 
                                 setState(() {
                                   loading = false;

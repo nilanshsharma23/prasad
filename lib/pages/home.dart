@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:location/location.dart';
+import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
 import 'package:prasad/utils/classes/listing_object.dart';
+import 'package:prasad/utils/enums/status_enum.dart';
 import 'package:prasad/utils/widgets/listing_container.dart';
 import 'package:prasad/utils/widgets/barriers/location_permission_screen.dart';
 import 'package:prasad/utils/widgets/status_container.dart';
@@ -78,10 +80,15 @@ class _HomePageState extends State<HomePage> {
               ),
               ListingContainer(
                 listingObject: ListingObject(
-                  location: "Raj Nagar, Ghaziabad",
-                  date: "Today",
-                  time: "9:00AM - 5:00PM",
-                  people: "100+",
+                  address: "Raj Nagar, Ghaziabad",
+                  date: DateTime(2025, 12, 2),
+                  from: TimeOfDay(hour: 0, minute: 5),
+                  to: TimeOfDay(hour: 5, minute: 0),
+                  uid: "",
+                  host: "",
+                  latLong: LatLong(40.7128, -74.0060),
+                  status: Status.accepted,
+                  people: 100,
                 ),
               ),
             ],

@@ -34,6 +34,14 @@ class MainNavigationBar extends StatelessWidget {
           ),
         ),
         NavigationDestination(
+          icon: Icon(Icons.view_comfortable_outlined),
+          label: "My Bhandaras",
+          selectedIcon: Icon(
+            Icons.view_comfortable,
+            color: Theme.of(context).colorScheme.onPrimary,
+          ),
+        ),
+        NavigationDestination(
           icon: Icon(Icons.person_outline),
           label: "Profile",
           selectedIcon: Icon(
