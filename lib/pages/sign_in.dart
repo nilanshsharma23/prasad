@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otp_autofill/otp_autofill.dart';
@@ -16,6 +15,7 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   GlobalKey<FormState> phoneNumberFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> otpFormKey = GlobalKey<FormState>();
   GlobalKey<FormState> nameFormKey = GlobalKey<FormState>();
 
   PageController pageController = PageController();
@@ -23,7 +23,7 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController mobileNumberController = TextEditingController();
   TextEditingController nameController = TextEditingController();
 
-  late OTPTextEditController controller;
+  OTPTextEditController otpController = OTPTextEditController(codeLength: 6);
 
   bool loading = false;
 
@@ -90,20 +90,26 @@ class _SignInPageState extends State<SignInPage> {
                                 loading = false;
                               });
 
-                              controller =
-                                  OTPTextEditController(
-                                    codeLength: 6,
-                                    onCodeReceive: (code) {},
-                                  )..startListenUserConsent((code) {
-                                    final exp = RegExp(r'(\d{6})');
-                                    return exp.stringMatch(code ?? '') ?? '';
-                                  });
-
                               pageController.animateToPage(
                                 1,
                                 duration: Durations.medium1,
                                 curve: Curves.bounceInOut,
                               );
+
+                              setState(() {
+                                otpController =
+                                    OTPTextEditController(
+                                      codeLength: 6,
+                                      onCodeReceive: (code) {
+                                        setState(() {
+                                          otpController.text = code;
+                                        });
+                                      },
+                                    )..startListenUserConsent((code) {
+                                      final exp = RegExp(r'(\d{6})');
+                                      return exp.stringMatch(code ?? '') ?? '';
+                                    });
+                              });
                             }
                           },
                           style: TextButton.styleFrom(
@@ -126,78 +132,116 @@ class _SignInPageState extends State<SignInPage> {
                     ],
                   ),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 16,
-                  children: [
-                    Text(
-                      "Enter OTP",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 32,
+                Form(
+                  key: otpFormKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 16,
+                    children: [
+                      Text(
+                        "Enter OTP",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 32,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "An OTP has been sent to your mobile number.",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Theme.of(context).colorScheme.onSecondary,
+                      Text(
+                        "An OTP has been sent to your mobile number.",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Theme.of(context).colorScheme.onSecondary,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 16),
-                    OtpTextField(
-                      onSubmit: (value) async {
-                        setState(() {
-                          loading = true;
-                        });
+                      SizedBox(height: 8),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          labelText: "Enter OTP",
+                        ),
+                        controller: otpController,
+                        keyboardType: TextInputType.phone,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please Enter Something";
+                          }
 
-                        try {
-                          final AuthResponse response = await Globals
-                              .supabase
-                              .auth
-                              .verifyOTP(
-                                type: OtpType.sms,
-                                phone: "+91${mobileNumberController.text}",
-                                token: value,
-                              );
+                          if (value.length != 6) {
+                            return "OTP should be 10 digits";
+                          }
 
-                          Globals.currentUser = response.user;
+                          return null;
+                        },
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: TextButton(
+                          onPressed: () async {
+                            if (otpFormKey.currentState!.validate()) {
+                              setState(() {
+                                loading = true;
+                              });
 
-                          final data = await Globals.supabase
-                              .from('users')
-                              .select()
-                              .eq('user_id', response.user!.id);
+                              try {
+                                final AuthResponse response = await Globals
+                                    .supabase
+                                    .auth
+                                    .verifyOTP(
+                                      type: OtpType.sms,
+                                      phone:
+                                          "+91${mobileNumberController.text}",
+                                      token: otpController.text,
+                                    );
 
-                          if (data.isNotEmpty) {
-                            if (context.mounted) {
-                              context.go('/');
+                                Globals.currentUser = response.user;
+
+                                final data = await Globals.supabase
+                                    .from('users')
+                                    .select()
+                                    .eq('user_id', response.user!.id);
+
+                                if (data.isNotEmpty) {
+                                  if (context.mounted) {
+                                    context.go('/');
+                                  }
+                                } else {
+                                  pageController.animateToPage(
+                                    2,
+                                    duration: Durations.medium1,
+                                    curve: Curves.bounceInOut,
+                                  );
+                                }
+                              } catch (e) {
+                                if (context.mounted) {
+                                  showErrorDialog(context, e.toString());
+                                }
+                              }
+                              setState(() {
+                                loading = false;
+                              });
                             }
-                          } else {
-                            pageController.animateToPage(
-                              2,
-                              duration: Durations.medium1,
-                              curve: Curves.bounceInOut,
-                            );
-                          }
-                        } catch (e) {
-                          if (context.mounted) {
-                            showErrorDialog(context, e.toString());
-                          }
-                        }
-
-                        setState(() {
-                          loading = false;
-                        });
-                      },
-                      numberOfFields: 6,
-                      showFieldAsBox: true,
-                      enabledBorderColor: Theme.of(context).colorScheme.outline,
-                      focusedBorderColor: Theme.of(context).colorScheme.primary,
-                      textStyle: TextStyle(fontSize: 16),
-                      fieldWidth: 48,
-                    ),
-                  ],
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor: Theme.of(
+                              context,
+                            ).colorScheme.primary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(8),
+                            ),
+                          ),
+                          child: Text(
+                            "Verify",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 Form(
                   key: nameFormKey,
