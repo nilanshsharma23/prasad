@@ -16,28 +16,28 @@ Future<List<ListingObject>> getListingsNearby({
   var topPoint = FlutterMapMath.destinationPoint(
     locationData.latitude!,
     locationData.longitude!,
-    distanceInKm * 10,
+    distanceInKm * 1000,
     90,
   );
 
   var bottomPoint = FlutterMapMath.destinationPoint(
     locationData.latitude!,
     locationData.longitude!,
-    distanceInKm * 10,
+    distanceInKm * 1000,
     270,
   );
 
   var leftPoint = FlutterMapMath.destinationPoint(
     locationData.latitude!,
     locationData.longitude!,
-    distanceInKm * 10,
+    distanceInKm * 1000,
     180,
   );
 
   var rightPoint = FlutterMapMath.destinationPoint(
     locationData.latitude!,
     locationData.longitude!,
-    distanceInKm * 10,
+    distanceInKm * 1000,
     0,
   );
 
