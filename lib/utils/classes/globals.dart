@@ -5,4 +5,5 @@ class Globals {
   static SupabaseClient supabase = Supabase.instance.client;
   static User? currentUser;
   static LocationData? currentLocation;
+  static int currentColorScheme = 0;
 }

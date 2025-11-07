@@ -25,6 +25,7 @@ dependencies:
   maps_launcher: ^3.0.0+1
   otp_autofill: ^4.1.0
   provider: ^6.1.5+1
+  shared_preferences: ^2.5.3
   supabase_flutter: ^2.10.3
   time_range: ^1.1.1
 

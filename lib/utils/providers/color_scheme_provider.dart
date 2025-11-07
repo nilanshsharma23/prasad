@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/color_schemes.dart';
 
 class ColorSchemeProvider extends ChangeNotifier {
   ColorScheme currentColorScheme =
-      SchedulerBinding.instance.platformDispatcher.platformBrightness ==
-          Brightness.dark
-      ? ColorSchemes.darkColors
-      : ColorSchemes.lightColors;
+      ColorSchemes.colorSchemeList[Globals.currentColorScheme];
 
   setColorScheme(ColorScheme colorScheme) {
     currentColorScheme = colorScheme;

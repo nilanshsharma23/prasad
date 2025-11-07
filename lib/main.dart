@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/providers/color_scheme_provider.dart';
 import 'package:prasad/utils/router.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
@@ -11,6 +13,12 @@ Future<void> main() async {
     url: dotenv.get("SUPABASE_URL"),
     anonKey: dotenv.get('ANON_KEY'),
   );
+
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  if (prefs.getInt('current_color_scheme') != null) {
+    Globals.currentColorScheme = prefs.getInt('current_color_scheme')!;
+  }
 
   runApp(
     MultiProvider(
