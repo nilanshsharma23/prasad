@@ -3,12 +3,21 @@ import 'package:intl/intl.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/classes/listing_object.dart';
+import 'package:prasad/utils/functions/get_clicks.dart';
 import 'package:prasad/utils/functions/get_status_color.dart';
 
 class ListingContainer extends StatelessWidget {
-  const ListingContainer({super.key, required this.listingObject});
+  const ListingContainer({
+    super.key,
+    required this.listingObject,
+    required this.onStartToLoad,
+    required this.onStoppedLoading,
+  });
 
   final ListingObject listingObject;
+
+  final void Function()? onStartToLoad;
+  final void Function()? onStoppedLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -113,8 +122,52 @@ class ListingContainer extends StatelessWidget {
                   ),
                 ],
               ),
+            if (Globals.supabase.auth.currentUser != null &&
+                listingObject.host == Globals.supabase.auth.currentUser!.id)
+              FutureBuilder(
+                future: getClicks(uid: listingObject.uid),
+                builder: (context, asyncSnapshot) {
+                  if (asyncSnapshot.hasData) {
+                    return Row(
+                      children: [
+                        Text(
+                          "Clicks: ",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          asyncSnapshot.data!.toString(),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
+                onStartToLoad!();
+
+                final data = await Globals.supabase
+                    .from('listings')
+                    .select('clicks')
+                    .eq('uid', listingObject.uid)
+                    .single();
+
+                await Globals.supabase
+                    .from('listings')
+                    .update({'clicks': data['clicks'] + 1})
+                    .eq('uid', listingObject.uid);
+
+                onStoppedLoading!();
+
                 MapsLauncher.launchCoordinates(
                   listingObject.latLong.latitude,
                   listingObject.latLong.longitude,
@@ -126,7 +179,6 @@ class ListingContainer extends StatelessWidget {
                   borderRadius: BorderRadiusGeometry.circular(8),
                 ),
               ),
-
               child: SizedBox(
                 width: double.infinity,
                 child: Text(

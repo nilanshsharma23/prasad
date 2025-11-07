@@ -31,6 +31,8 @@ class MyListingsPage extends StatelessWidget {
                         children: List.generate(snapshot.data!.length, (index) {
                           return ListingContainer(
                             listingObject: snapshot.data![index],
+                            onStartToLoad: () {},
+                            onStoppedLoading: () {},
                           );
                         }),
                       );
