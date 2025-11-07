@@ -13,8 +13,6 @@ Future<ProfileObject> getProfileInfo({required String userId}) async {
       .select()
       .eq('host', userId);
 
-  print(listings);
-
   return ProfileObject(
     name: nameData['name'],
     numberOfListings: listings.length,
