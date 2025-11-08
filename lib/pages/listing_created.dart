@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:prasad/l10n/app_localizations.dart';
 
 class ListingCreatedPage extends StatelessWidget {
   const ListingCreatedPage({super.key});
@@ -23,12 +24,12 @@ class ListingCreatedPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Success!",
+                AppLocalizations.of(context)!.success,
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
               ),
               Text(
-                "Your listing has been created.",
+                AppLocalizations.of(context)!.bhandaraCreated,
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16),
               ),

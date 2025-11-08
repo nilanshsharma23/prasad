@@ -5,7 +5,11 @@ import 'package:prasad/utils/classes/listing_object.dart';
 
 Future<List<ListingObject>> getListingsNearby({
   required int distanceInKm,
+  required void Function() onStartLoading,
+  required void Function() onStopLoading,
 }) async {
+  onStartLoading();
+
   List<ListingObject> output = [];
 
   Location location = Location();
@@ -53,6 +57,8 @@ Future<List<ListingObject>> getListingsNearby({
   for (var listing in data) {
     output.add(ListingObject.fromJson(listing));
   }
+
+  onStopLoading();
 
   return output;
 }

@@ -5,6 +5,7 @@ import 'package:flutter_map_math/flutter_geo_math.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/classes/listing_object.dart';
 import 'package:prasad/utils/functions/get_listings_nearby.dart';
@@ -27,7 +28,19 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    getListingsNearbyFuture = getListingsNearby(distanceInKm: 1);
+    getListingsNearbyFuture = getListingsNearby(
+      distanceInKm: 1,
+      onStartLoading: () {
+        setState(() {
+          loading = true;
+        });
+      },
+      onStopLoading: () {
+        setState(() {
+          loading = false;
+        });
+      },
+    );
   }
 
   @override
@@ -64,14 +77,34 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.fromLTRB(32, 16, 32, 0),
                     child: DropdownMenu<int>(
                       dropdownMenuEntries: [
-                        DropdownMenuEntry(value: 1, label: "1 km"),
-                        DropdownMenuEntry(value: 2, label: "2 km"),
-                        DropdownMenuEntry(value: 5, label: "5 km"),
-                        DropdownMenuEntry(value: 10, label: "10 km"),
-                        DropdownMenuEntry(value: 20, label: "20 km"),
+                        DropdownMenuEntry(
+                          value: 1,
+                          label:
+                              "1 ${AppLocalizations.of(context)!.kilometers}",
+                        ),
+                        DropdownMenuEntry(
+                          value: 2,
+                          label:
+                              "2 ${AppLocalizations.of(context)!.kilometers}",
+                        ),
+                        DropdownMenuEntry(
+                          value: 5,
+                          label:
+                              "5 ${AppLocalizations.of(context)!.kilometers}",
+                        ),
+                        DropdownMenuEntry(
+                          value: 10,
+                          label:
+                              "10 ${AppLocalizations.of(context)!.kilometers}",
+                        ),
+                        DropdownMenuEntry(
+                          value: 20,
+                          label:
+                              "20 ${AppLocalizations.of(context)!.kilometers}",
+                        ),
                       ],
                       initialSelection: 1,
-                      label: Text("Distance"),
+                      label: Text(AppLocalizations.of(context)!.distance),
                       inputDecorationTheme: InputDecorationTheme(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
@@ -82,6 +115,16 @@ class _HomePageState extends State<HomePage> {
                         setState(() {
                           getListingsNearbyFuture = getListingsNearby(
                             distanceInKm: value!,
+                            onStartLoading: () {
+                              setState(() {
+                                loading = true;
+                              });
+                            },
+                            onStopLoading: () {
+                              setState(() {
+                                loading = false;
+                              });
+                            },
                           );
                         });
                       },
@@ -125,20 +168,24 @@ class _HomePageState extends State<HomePage> {
                                       ).colorScheme.primary,
                                       status: asyncSnapshot.data!.length
                                           .toString(),
-                                      subtext: "Nearby",
+                                      subtext: AppLocalizations.of(
+                                        context,
+                                      )!.nearby,
                                     ),
                                     StatusContainer(
                                       primaryColor: Theme.of(
                                         context,
                                       ).colorScheme.secondary,
                                       status:
-                                          "${distances.reduce(min).toStringAsFixed(2)}km",
-                                      subtext: "Nearest",
+                                          "${distances.reduce(min).toStringAsFixed(2)}${AppLocalizations.of(context)!.kilometers}",
+                                      subtext: AppLocalizations.of(
+                                        context,
+                                      )!.nearest,
                                     ),
                                   ],
                                 ),
                                 Text(
-                                  "Nearby Bhandaras",
+                                  AppLocalizations.of(context)!.nearbyBhandaras,
                                   style: TextStyle(
                                     fontSize: 32,
                                     fontWeight: FontWeight.bold,
@@ -174,13 +221,24 @@ class _HomePageState extends State<HomePage> {
                           );
                         } else {
                           return BarrierScreen(
-                            barrierText:
-                                "No Bhandaras are available at this distance right now",
-                            buttonText: "Reload",
+                            barrierText: AppLocalizations.of(
+                              context,
+                            )!.noBhandaras,
+                            buttonText: AppLocalizations.of(context)!.reload,
                             onButtonPressed: () {
                               setState(() {
                                 getListingsNearbyFuture = getListingsNearby(
                                   distanceInKm: 10,
+                                  onStartLoading: () {
+                                    setState(() {
+                                      loading = true;
+                                    });
+                                  },
+                                  onStopLoading: () {
+                                    setState(() {
+                                      loading = false;
+                                    });
+                                  },
                                 );
                               });
                             },

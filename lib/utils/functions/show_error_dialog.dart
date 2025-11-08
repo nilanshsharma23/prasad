@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prasad/l10n/app_localizations.dart';
 
 void showErrorDialog(BuildContext context, String errorMessage) {
   showDialog(
@@ -12,7 +13,7 @@ void showErrorDialog(BuildContext context, String errorMessage) {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text("OK"),
+          child: Text(AppLocalizations.of(context)!.ok),
         ),
       ],
     ),

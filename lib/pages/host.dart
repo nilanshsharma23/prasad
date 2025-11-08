@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
+import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/pages/pick_location.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/functions/show_error_dialog.dart';
@@ -49,7 +50,7 @@ class _HostPageState extends State<HostPage> {
                       spacing: 16,
                       children: [
                         Text(
-                          "Host A Bhandara",
+                          AppLocalizations.of(context)!.hostABhandara,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 32,
@@ -102,7 +103,9 @@ class _HostPageState extends State<HostPage> {
                               child: Text(
                                 pickedLocationData != null
                                     ? pickedLocationData!.address
-                                    : "Select Location",
+                                    : AppLocalizations.of(
+                                        context,
+                                      )!.selectLocation,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   color: Theme.of(
@@ -146,7 +149,7 @@ class _HostPageState extends State<HostPage> {
                               child: Text(
                                 selectedDate != null
                                     ? DateFormat.yMMMEd().format(selectedDate!)
-                                    : "Select Date",
+                                    : AppLocalizations.of(context)!.selectDate,
                                 style: TextStyle(
                                   color: Theme.of(
                                     context,
@@ -160,14 +163,14 @@ class _HostPageState extends State<HostPage> {
                         TimeRange(
                           timeBlock: 15,
                           fromTitle: Text(
-                            "From",
+                            AppLocalizations.of(context)!.from,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           toTitle: Text(
-                            "To",
+                            AppLocalizations.of(context)!.to,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -196,14 +199,16 @@ class _HostPageState extends State<HostPage> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            labelText: "No Of People",
+                            labelText: AppLocalizations.of(context)!.noOfPeople,
                           ),
                           keyboardType: TextInputType.numberWithOptions(
                             decimal: false,
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return "Please enter something";
+                              return AppLocalizations.of(
+                                context,
+                              )!.pleaseEnterSomething;
                             }
 
                             return null;
@@ -249,7 +254,7 @@ class _HostPageState extends State<HostPage> {
                                 spacing: 4,
                                 children: [
                                   Text(
-                                    "Upload Proof",
+                                    AppLocalizations.of(context)!.uploadProof,
                                     style: TextStyle(
                                       color: Theme.of(
                                         context,
@@ -258,7 +263,9 @@ class _HostPageState extends State<HostPage> {
                                     ),
                                   ),
                                   Text(
-                                    "Any sort of document confirming the bhandara like an advance payment receipt from the caterer or tent.",
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.uploadProofDescription,
                                     style: TextStyle(
                                       color: Theme.of(
                                         context,
@@ -300,7 +307,9 @@ class _HostPageState extends State<HostPage> {
                                 if (selectedDate == null) {
                                   showErrorDialog(
                                     context,
-                                    "Date not selected.",
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.dateNotSelected,
                                   );
 
                                   return;
@@ -309,7 +318,9 @@ class _HostPageState extends State<HostPage> {
                                 if (selectedTimeRange == null) {
                                   showErrorDialog(
                                     context,
-                                    "Time not selected.",
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.timeNotSelected,
                                   );
 
                                   return;
@@ -318,7 +329,9 @@ class _HostPageState extends State<HostPage> {
                                 if (pickedLocationData == null) {
                                   showErrorDialog(
                                     context,
-                                    "Location not picked.",
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.locationNotSelected,
                                   );
 
                                   return;
@@ -327,7 +340,9 @@ class _HostPageState extends State<HostPage> {
                                 if (uploadedProof == null) {
                                   showErrorDialog(
                                     context,
-                                    "Proof not uploaded.",
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.proofNotUploaded,
                                   );
 
                                   return;
@@ -387,7 +402,7 @@ class _HostPageState extends State<HostPage> {
                               ),
                             ),
                             child: Text(
-                              "Host",
+                              AppLocalizations.of(context)!.host,
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Theme.of(context).colorScheme.onPrimary,

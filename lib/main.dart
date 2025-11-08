@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/providers/color_scheme_provider.dart';
 import 'package:prasad/utils/router.dart';
@@ -39,6 +41,14 @@ class MainApp extends StatelessWidget {
           context,
         ).currentColorScheme,
       ),
+      title: "Prasad",
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [Locale('en'), Locale('hi')],
+      locale: Locale('hi'),
       debugShowCheckedModeBanner: false,
       routerConfig: router,
     );

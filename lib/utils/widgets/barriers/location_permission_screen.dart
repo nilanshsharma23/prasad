@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:location/location.dart';
+import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/widgets/barriers/barrier_screen.dart';
 
 class LocationPermissionScreen extends StatefulWidget {
@@ -34,8 +35,8 @@ class _LocationPermissionScreenState extends State<LocationPermissionScreen> {
           } else {
             return BarrierScreen(
               barrierText:
-                  "You need to grant location permission in order to access the functionality of this app.",
-              buttonText: "Grant Permission",
+                  "You need to grant location permission in order to access some features.",
+              buttonText: AppLocalizations.of(context)!.grantPermission,
               onButtonPressed: () async {
                 Location location = Location();
 
