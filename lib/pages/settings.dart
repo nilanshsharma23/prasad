@@ -7,6 +7,7 @@ import 'package:prasad/utils/color_schemes.dart';
 import 'package:prasad/utils/enums/themes_enum.dart';
 import 'package:prasad/utils/functions/delete_account.dart';
 import 'package:prasad/utils/providers/color_scheme_provider.dart';
+import 'package:prasad/utils/providers/language_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,6 +30,7 @@ class _SettingsPageState extends State<SettingsPage> {
           Padding(
             padding: const EdgeInsets.all(32.0),
             child: Column(
+              spacing: 16,
               children: [
                 DropdownMenu(
                   dropdownMenuEntries: Themes.entries,
@@ -54,6 +56,35 @@ class _SettingsPageState extends State<SettingsPage> {
                     prefs.setInt('current_color_scheme', value.index);
                   },
                   width: double.infinity,
+                ),
+                DropdownMenu(
+                  dropdownMenuEntries: [
+                    DropdownMenuEntry(value: "en", label: "English"),
+                    DropdownMenuEntry(value: "hi", label: "हिंदी"),
+                  ],
+                  initialSelection: Globals.currentLocale,
+                  label: Text(AppLocalizations.of(context)!.language),
+                  inputDecorationTheme: InputDecorationTheme(
+                    border: InputBorder.none,
+                  ),
+                  width: double.infinity,
+                  onSelected: (value) async {
+                    LanguageProvider languageProvider =
+                        Provider.of<LanguageProvider>(context, listen: false);
+
+                    if (value != null) {
+                      languageProvider.setCurrentLocale(value);
+
+                      setState(() {
+                        Globals.currentLocale = value;
+                      });
+
+                      final SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+
+                      prefs.setString('current_locale', value);
+                    }
+                  },
                 ),
                 if (Globals.supabase.auth.currentUser != null)
                   SizedBox(

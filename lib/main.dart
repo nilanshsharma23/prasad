@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/providers/color_scheme_provider.dart';
+import 'package:prasad/utils/providers/language_provider.dart';
 import 'package:prasad/utils/router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,10 +22,16 @@ Future<void> main() async {
   if (prefs.getInt('current_color_scheme') != null) {
     Globals.currentColorScheme = prefs.getInt('current_color_scheme')!;
   }
+  if (prefs.getString('current_locale') != null) {
+    Globals.currentLocale = prefs.getString('current_locale')!;
+  }
 
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => ColorSchemeProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => ColorSchemeProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageProvider()),
+      ],
       child: MainApp(),
     ),
   );
@@ -48,7 +55,7 @@ class MainApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: [Locale('en'), Locale('hi')],
-      locale: Locale('hi'),
+      locale: Locale(Provider.of<LanguageProvider>(context).currentLocale),
       debugShowCheckedModeBanner: false,
       routerConfig: router,
     );

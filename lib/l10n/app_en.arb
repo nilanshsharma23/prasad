@@ -93,5 +93,7 @@
     "signOut": "Sign Out",
     "@signOut": {},
     "deleteAccount": "Delete Account",
-    "@deleteAccount": {}
+    "@deleteAccount": {},
+    "language": "Language",
+    "@language": {}
 }

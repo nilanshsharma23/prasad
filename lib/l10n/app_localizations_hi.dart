@@ -150,4 +150,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get deleteAccount => 'अकाउंट डिलीट करें';
+
+  @override
+  String get language => 'भाषा';
 }
