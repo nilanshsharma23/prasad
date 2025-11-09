@@ -145,4 +145,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get times => ' times';
+
+  @override
+  String get signOut => 'Sign Out';
+
+  @override
+  String get deleteAccount => 'Delete Account';
 }

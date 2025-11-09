@@ -44,5 +44,7 @@
     "needToSignIn": "आपको यह देखने के लिए लॉग इन करना पड़ेगा",
     "provideLocationPermission": "यह देखने आपको स्थानीय अनुमति देनी पड़ेगी",
     "clicks": "दबाया गया: ",
-    "times": " बार"
+    "times": " बार",
+    "signOut": "लोग आउट करें",
+    "deleteAccount": "अकाउंट डिलीट करें"
 }

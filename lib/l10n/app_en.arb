@@ -89,5 +89,9 @@
     "clicks": "Clicks: ",
     "@clicks": {},
     "times": " times",
-    "@times": {}
+    "@times": {},
+    "signOut": "Sign Out",
+    "@signOut": {},
+    "deleteAccount": "Delete Account",
+    "@deleteAccount": {}
 }

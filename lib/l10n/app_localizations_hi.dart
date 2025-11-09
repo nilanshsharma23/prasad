@@ -144,4 +144,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get times => ' बार';
+
+  @override
+  String get signOut => 'लोग आउट करें';
+
+  @override
+  String get deleteAccount => 'अकाउंट डिलीट करें';
 }
