@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/color_schemes.dart';
 import 'package:prasad/utils/enums/themes_enum.dart';
@@ -17,7 +18,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Settings")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.settings)),
       body: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Column(
@@ -25,7 +26,7 @@ class _SettingsPageState extends State<SettingsPage> {
             DropdownMenu(
               dropdownMenuEntries: Themes.entries,
               initialSelection: Themes.values[Globals.currentColorScheme],
-              label: Text("Theme"),
+              label: Text(AppLocalizations.of(context)!.theme),
               inputDecorationTheme: InputDecorationTheme(
                 border: InputBorder.none,
               ),

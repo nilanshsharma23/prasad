@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
+import 'package:prasad/l10n/app_localizations.dart';
 
 class PickLocationPage extends StatelessWidget {
   const PickLocationPage({
@@ -15,7 +16,7 @@ class PickLocationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Pick Location")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.selectLocation)),
       body: FlutterLocationPicker(
         initPosition: currentLocation,
         loadingWidget: SpinKitThreeBounce(

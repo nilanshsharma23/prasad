@@ -247,6 +247,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'OK'**
   String get ok;
+
+  /// No description provided for @myBhandaras.
+  ///
+  /// In en, this message translates to:
+  /// **'My Bhandaras'**
+  String get myBhandaras;
+
+  /// No description provided for @bhandarasHosted.
+  ///
+  /// In en, this message translates to:
+  /// **'Bhandaras Hosted: '**
+  String get bhandarasHosted;
+
+  /// No description provided for @thanksForHosting.
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks for hosting with us!'**
+  String get thanksForHosting;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get theme;
+
+  /// No description provided for @signIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get signIn;
+
+  /// No description provided for @enterMobileNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Your Mobile Number'**
+  String get enterMobileNumber;
+
+  /// No description provided for @tenDigitMobileNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile number should be 10 digits'**
+  String get tenDigitMobileNumber;
+
+  /// No description provided for @sendOTP.
+  ///
+  /// In en, this message translates to:
+  /// **'Send OTP'**
+  String get sendOTP;
+
+  /// No description provided for @enterOTP.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter OTP'**
+  String get enterOTP;
+
+  /// No description provided for @otpSent.
+  ///
+  /// In en, this message translates to:
+  /// **'An OTP has been sent to your mobile number.'**
+  String get otpSent;
+
+  /// No description provided for @sixDigitOTP.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP should be 6 digits'**
+  String get sixDigitOTP;
+
+  /// No description provided for @continueOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueOn;
+
+  /// No description provided for @enterYourName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Your Name'**
+  String get enterYourName;
+
+  /// No description provided for @takeMeThere.
+  ///
+  /// In en, this message translates to:
+  /// **'Take Me There'**
+  String get takeMeThere;
+
+  /// No description provided for @status.
+  ///
+  /// In en, this message translates to:
+  /// **'Status: '**
+  String get status;
+
+  /// No description provided for @needToSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to sign in to access this feature.'**
+  String get needToSignIn;
+
+  /// No description provided for @provideLocationPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to grant location permission in order to access some features.'**
+  String get provideLocationPermission;
+
+  /// No description provided for @clicks.
+  ///
+  /// In en, this message translates to:
+  /// **'Clicks: '**
+  String get clicks;
+
+  /// No description provided for @times.
+  ///
+  /// In en, this message translates to:
+  /// **' times'**
+  String get times;
 }
 
 class _AppLocalizationsDelegate

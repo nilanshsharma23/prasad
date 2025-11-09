@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:maps_launcher/maps_launcher.dart';
+import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/classes/listing_object.dart';
 import 'package:prasad/utils/functions/get_clicks.dart';
@@ -106,7 +107,7 @@ class ListingContainer extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Status: ",
+                    AppLocalizations.of(context)!.status,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   Text(
@@ -131,7 +132,7 @@ class ListingContainer extends StatelessWidget {
                     return Row(
                       children: [
                         Text(
-                          "Clicks: ",
+                          AppLocalizations.of(context)!.clicks,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -139,6 +140,13 @@ class ListingContainer extends StatelessWidget {
                         ),
                         Text(
                           asyncSnapshot.data!.toString(),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!.times,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -182,7 +190,7 @@ class ListingContainer extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 child: Text(
-                  "Take Me There",
+                  AppLocalizations.of(context)!.takeMeThere,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,

@@ -32,7 +32,7 @@ class StatusContainer extends StatelessWidget {
               status,
               style: TextStyle(
                 color: Theme.of(context).colorScheme.onSurface,
-                fontSize: 32,
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -83,4 +83,65 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get ok => 'ठीक है';
+
+  @override
+  String get myBhandaras => 'मेरे भंडारे';
+
+  @override
+  String get bhandarasHosted => 'आयोजित भंडारे: ';
+
+  @override
+  String get thanksForHosting => 'हमारे ऐप पर आयोजित करने के लिए शुक्रिया!';
+
+  @override
+  String get settings => 'सेटिंग्स';
+
+  @override
+  String get theme => 'मोड';
+
+  @override
+  String get signIn => 'लॉग इन';
+
+  @override
+  String get enterMobileNumber => 'फोन नंबर डालें';
+
+  @override
+  String get tenDigitMobileNumber => 'फ़ोन नंबर 10 अक्षरों का होना चाहिए';
+
+  @override
+  String get sendOTP => 'ओ.टी.पि. भेजें';
+
+  @override
+  String get enterOTP => 'ओ.टी.पी. डालें';
+
+  @override
+  String get otpSent => 'आपके फ़ोन पर एक ओ टी पी भेजा गया है';
+
+  @override
+  String get sixDigitOTP => 'ओ.टी.पि. 6 अक्षरों का होना चाहिए';
+
+  @override
+  String get continueOn => 'आगे बढ़ें';
+
+  @override
+  String get enterYourName => 'अपना नाम डालें';
+
+  @override
+  String get takeMeThere => 'रास्ता दिखाएं';
+
+  @override
+  String get status => 'स्थिति: ';
+
+  @override
+  String get needToSignIn => 'आपको यह देखने के लिए लॉग इन करना पड़ेगा';
+
+  @override
+  String get provideLocationPermission =>
+      'यह देखने आपको स्थानीय अनुमति देनी पड़ेगी';
+
+  @override
+  String get clicks => 'दबाया गया: ';
+
+  @override
+  String get times => ' बार';
 }

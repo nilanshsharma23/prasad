@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prasad/l10n/app_localizations.dart';
 
 class MainNavigationBar extends StatelessWidget {
   const MainNavigationBar({
@@ -16,37 +17,45 @@ class MainNavigationBar extends StatelessWidget {
       onDestinationSelected: onDestinationSelected,
       indicatorColor: Theme.of(context).colorScheme.onSurface,
       selectedIndex: selectedIndex,
+      labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+      indicatorShape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(16),
+      ),
       destinations: [
         NavigationDestination(
-          icon: Icon(Icons.home_outlined),
+          icon: Icon(Icons.home_outlined, size: 32),
           label: "Home",
           selectedIcon: Icon(
+            size: 32,
             Icons.home,
             color: Theme.of(context).colorScheme.onPrimary,
           ),
         ),
         NavigationDestination(
-          icon: Icon(Icons.add_outlined),
-          label: "Host",
+          icon: Icon(Icons.add_outlined, size: 32),
+          label: AppLocalizations.of(context)!.host,
           selectedIcon: Icon(
+            size: 32,
             Icons.add,
             color: Theme.of(context).colorScheme.onPrimary,
           ),
         ),
         NavigationDestination(
-          icon: Icon(Icons.view_comfortable_outlined),
-          label: "My Bhandaras",
+          icon: Icon(Icons.view_comfortable_outlined, size: 32),
+          label: AppLocalizations.of(context)!.myBhandaras,
           selectedIcon: Icon(
             Icons.view_comfortable,
             color: Theme.of(context).colorScheme.onPrimary,
+            size: 32,
           ),
         ),
         NavigationDestination(
-          icon: Icon(Icons.person_outline),
+          icon: Icon(Icons.person_outline, size: 32),
           label: "Profile",
           selectedIcon: Icon(
             Icons.person,
             color: Theme.of(context).colorScheme.onPrimary,
+            size: 32,
           ),
         ),
       ],

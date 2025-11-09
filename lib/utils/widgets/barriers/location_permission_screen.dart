@@ -34,8 +34,9 @@ class _LocationPermissionScreenState extends State<LocationPermissionScreen> {
             return widget.child;
           } else {
             return BarrierScreen(
-              barrierText:
-                  "You need to grant location permission in order to access some features.",
+              barrierText: AppLocalizations.of(
+                context,
+              )!.provideLocationPermission,
               buttonText: AppLocalizations.of(context)!.grantPermission,
               onButtonPressed: () async {
                 Location location = Location();

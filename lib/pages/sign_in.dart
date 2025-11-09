@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otp_autofill/otp_autofill.dart';
+import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/functions/show_error_dialog.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -46,7 +47,7 @@ class _SignInPageState extends State<SignInPage> {
                     spacing: 16,
                     children: [
                       Text(
-                        "Sign In",
+                        AppLocalizations.of(context)!.signIn,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 32,
@@ -57,17 +58,23 @@ class _SignInPageState extends State<SignInPage> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          labelText: "Enter Your Mobile Number",
+                          labelText: AppLocalizations.of(
+                            context,
+                          )!.enterMobileNumber,
                         ),
                         controller: mobileNumberController,
                         keyboardType: TextInputType.phone,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Please Enter Something";
+                            return AppLocalizations.of(
+                              context,
+                            )!.pleaseEnterSomething;
                           }
 
                           if (value.length != 10) {
-                            return "Mobile number should be 10 digits";
+                            return AppLocalizations.of(
+                              context,
+                            )!.tenDigitMobileNumber;
                           }
 
                           return null;
@@ -121,7 +128,7 @@ class _SignInPageState extends State<SignInPage> {
                             ),
                           ),
                           child: Text(
-                            "Send OTP",
+                            AppLocalizations.of(context)!.sendOTP,
                             style: TextStyle(
                               fontSize: 16,
                               color: Theme.of(context).colorScheme.onPrimary,
@@ -140,14 +147,14 @@ class _SignInPageState extends State<SignInPage> {
                     spacing: 16,
                     children: [
                       Text(
-                        "Enter OTP",
+                        AppLocalizations.of(context)!.enterOTP,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 32,
                         ),
                       ),
                       Text(
-                        "An OTP has been sent to your mobile number.",
+                        AppLocalizations.of(context)!.otpSent,
                         style: TextStyle(
                           fontSize: 16,
                           color: Theme.of(context).colorScheme.onSecondary,
@@ -159,17 +166,19 @@ class _SignInPageState extends State<SignInPage> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          labelText: "Enter OTP",
+                          labelText: AppLocalizations.of(context)!.enterOTP,
                         ),
                         controller: otpController,
                         keyboardType: TextInputType.phone,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Please Enter Something";
+                            return AppLocalizations.of(
+                              context,
+                            )!.pleaseEnterSomething;
                           }
 
                           if (value.length != 6) {
-                            return "OTP should be 10 digits";
+                            return AppLocalizations.of(context)!.sixDigitOTP;
                           }
 
                           return null;
@@ -232,7 +241,7 @@ class _SignInPageState extends State<SignInPage> {
                             ),
                           ),
                           child: Text(
-                            "Verify",
+                            AppLocalizations.of(context)!.continueOn,
                             style: TextStyle(
                               fontSize: 16,
                               color: Theme.of(context).colorScheme.onPrimary,
@@ -250,24 +259,21 @@ class _SignInPageState extends State<SignInPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: 16,
                     children: [
-                      Text(
-                        "Complete Profile",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 32,
-                        ),
-                      ),
                       TextFormField(
                         controller: nameController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          labelText: "Enter Your Name",
+                          labelText: AppLocalizations.of(
+                            context,
+                          )!.enterYourName,
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Please Enter Something";
+                            return AppLocalizations.of(
+                              context,
+                            )!.pleaseEnterSomething;
                           }
 
                           return null;
@@ -301,7 +307,7 @@ class _SignInPageState extends State<SignInPage> {
                             ),
                           ),
                           child: Text(
-                            "Continue",
+                            AppLocalizations.of(context)!.continueOn,
                             style: TextStyle(
                               fontSize: 16,
                               color: Theme.of(context).colorScheme.onPrimary,

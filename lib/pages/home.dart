@@ -30,16 +30,8 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     getListingsNearbyFuture = getListingsNearby(
       distanceInKm: 1,
-      onStartLoading: () {
-        setState(() {
-          loading = true;
-        });
-      },
-      onStopLoading: () {
-        setState(() {
-          loading = false;
-        });
-      },
+      onStartLoading: () {},
+      onStopLoading: () {},
     );
   }
 

@@ -12,8 +12,8 @@ import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/pages/pick_location.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/functions/show_error_dialog.dart';
+import 'package:prasad/utils/widgets/barriers/barrier_screen.dart';
 import 'package:prasad/utils/widgets/barriers/location_permission_screen.dart';
-import 'package:prasad/utils/widgets/barriers/sign_in_barrier_screen.dart';
 import 'package:time_range/time_range.dart';
 
 class HostPage extends StatefulWidget {
@@ -35,9 +35,9 @@ class _HostPageState extends State<HostPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: LocationPermissionScreen(
-        child: SignInBarrierScreen(
+    if (Globals.supabase.auth.currentUser != null) {
+      return Scaffold(
+        body: LocationPermissionScreen(
           child: Padding(
             padding: EdgeInsetsGeometry.all(32),
             child: Stack(
@@ -433,7 +433,15 @@ class _HostPageState extends State<HostPage> {
             ),
           ),
         ),
-      ),
-    );
+      );
+    } else {
+      return BarrierScreen(
+        barrierText: AppLocalizations.of(context)!.needToSignIn,
+        buttonText: AppLocalizations.of(context)!.signIn,
+        onButtonPressed: () {
+          context.push('/sign-in');
+        },
+      );
+    }
   }
 }

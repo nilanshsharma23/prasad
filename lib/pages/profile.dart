@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:go_router/go_router.dart';
+import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/functions/get_profile_info.dart';
-import 'package:prasad/utils/widgets/barriers/sign_in_barrier_screen.dart';
+import 'package:prasad/utils/widgets/barriers/barrier_screen.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -16,9 +18,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SignInBarrierScreen(
-        child: FutureBuilder(
+    if (Globals.supabase.auth.currentUser != null) {
+      return Scaffold(
+        body: FutureBuilder(
           future: getProfileInfo(userId: Globals.supabase.auth.currentUser!.id),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -36,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Bhandaras Hosted: ",
+                            AppLocalizations.of(context)!.bhandarasHosted,
                             style: TextStyle(fontSize: 16),
                           ),
                           Text(
@@ -49,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                       Text(
-                        "Thanks for hosting with us!",
+                        AppLocalizations.of(context)!.thanksForHosting,
                         style: TextStyle(fontSize: 16),
                       ),
                     ],
@@ -66,7 +68,15 @@ class _ProfilePageState extends State<ProfilePage> {
             }
           },
         ),
-      ),
-    );
+      );
+    } else {
+      return BarrierScreen(
+        barrierText: AppLocalizations.of(context)!.needToSignIn,
+        buttonText: AppLocalizations.of(context)!.signIn,
+        onButtonPressed: () {
+          context.push('/sign-in');
+        },
+      );
+    }
   }
 }

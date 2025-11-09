@@ -84,4 +84,65 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ok => 'OK';
+
+  @override
+  String get myBhandaras => 'My Bhandaras';
+
+  @override
+  String get bhandarasHosted => 'Bhandaras Hosted: ';
+
+  @override
+  String get thanksForHosting => 'Thanks for hosting with us!';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get theme => 'Theme';
+
+  @override
+  String get signIn => 'Sign In';
+
+  @override
+  String get enterMobileNumber => 'Enter Your Mobile Number';
+
+  @override
+  String get tenDigitMobileNumber => 'Mobile number should be 10 digits';
+
+  @override
+  String get sendOTP => 'Send OTP';
+
+  @override
+  String get enterOTP => 'Enter OTP';
+
+  @override
+  String get otpSent => 'An OTP has been sent to your mobile number.';
+
+  @override
+  String get sixDigitOTP => 'OTP should be 6 digits';
+
+  @override
+  String get continueOn => 'Continue';
+
+  @override
+  String get enterYourName => 'Enter Your Name';
+
+  @override
+  String get takeMeThere => 'Take Me There';
+
+  @override
+  String get status => 'Status: ';
+
+  @override
+  String get needToSignIn => 'You need to sign in to access this feature.';
+
+  @override
+  String get provideLocationPermission =>
+      'You need to grant location permission in order to access some features.';
+
+  @override
+  String get clicks => 'Clicks: ';
+
+  @override
+  String get times => ' times';
 }

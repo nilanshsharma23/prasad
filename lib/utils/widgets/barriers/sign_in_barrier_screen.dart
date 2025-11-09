@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/widgets/barriers/barrier_screen.dart';
 
@@ -10,16 +11,16 @@ class SignInBarrierScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Globals.supabase.auth.currentUser != null) {
-      return child;
-    } else {
+    if (Globals.supabase.auth.currentUser == null) {
       return BarrierScreen(
-        barrierText: "You need to sign in to access this feature.",
-        buttonText: "Sign In",
+        barrierText: AppLocalizations.of(context)!.needToSignIn,
+        buttonText: AppLocalizations.of(context)!.signIn,
         onButtonPressed: () {
           context.push('/sign-in');
         },
       );
+    } else {
+      return child;
     }
   }
 }
