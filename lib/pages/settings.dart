@@ -5,6 +5,7 @@ import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/color_schemes.dart';
 import 'package:prasad/utils/enums/themes_enum.dart';
+import 'package:prasad/utils/functions/delete_account.dart';
 import 'package:prasad/utils/providers/color_scheme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -93,7 +94,23 @@ class _SettingsPageState extends State<SettingsPage> {
                   SizedBox(
                     width: double.infinity,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        setState(() {
+                          loading = true;
+                        });
+
+                        await deleteAccount(
+                          uid: Globals.supabase.auth.currentUser!.id,
+                        );
+
+                        setState(() {
+                          loading = false;
+                        });
+
+                        if (context.mounted) {
+                          context.go('/');
+                        }
+                      },
                       style: TextButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadiusGeometry.circular(8),
