@@ -283,7 +283,7 @@ class _SignInPageState extends State<SignInPage> {
                         width: double.infinity,
                         child: TextButton(
                           onPressed: () async {
-                            if (phoneNumberFormKey.currentState!.validate()) {
+                            if (nameFormKey.currentState!.validate()) {
                               setState(() {
                                 loading = true;
                               });

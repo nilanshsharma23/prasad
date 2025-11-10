@@ -80,6 +80,8 @@ class _HostPageState extends State<HostPage> {
                                       setState(() {
                                         pickedLocationData = value;
                                       });
+
+                                      print(value.addressData);
                                     },
                                   ),
                                 ),
@@ -352,6 +354,40 @@ class _HostPageState extends State<HostPage> {
                                   loading = true;
                                 });
 
+                                String address = "";
+
+                                if (pickedLocationData!
+                                        .addressData['amenity'] !=
+                                    null) {
+                                  address +=
+                                      "${pickedLocationData!.addressData['amenity']}, ";
+                                }
+
+                                if (pickedLocationData!.addressData['road'] !=
+                                    null) {
+                                  address +=
+                                      "${pickedLocationData!.addressData['road']}, ";
+                                }
+
+                                if (pickedLocationData!.addressData['suburb'] !=
+                                    null) {
+                                  address +=
+                                      "${pickedLocationData!.addressData['suburb']}, ";
+                                }
+
+                                if (pickedLocationData!
+                                        .addressData['amenity'] !=
+                                    null) {
+                                  address +=
+                                      "${pickedLocationData!.addressData['city']}, ";
+                                }
+
+                                if (pickedLocationData!.addressData['state'] !=
+                                    null) {
+                                  address +=
+                                      "${pickedLocationData!.addressData['state']}";
+                                }
+
                                 var data = await Globals.supabase
                                     .from('listings')
                                     .insert({
@@ -371,8 +407,7 @@ class _HostPageState extends State<HostPage> {
                                       'people': int.parse(
                                         noOfPeopleController.text,
                                       ),
-                                      'address':
-                                          "${pickedLocationData!.addressData['suburb']}, ${pickedLocationData!.addressData['city']}",
+                                      'address': address,
                                     })
                                     .select('host, uid')
                                     .single();

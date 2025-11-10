@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get grantPermission => 'Grand Permission';
+  String get grantPermission => 'Grant Permission';
 
   @override
   String get nearbyBhandaras => 'Nearby Bhandaras';
@@ -154,4 +154,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get language => 'Language';
+
+  @override
+  String get selectLanguage => 'Select Language';
+
+  @override
+  String get findBhandaras => 'Find Bhandaras';
+
+  @override
+  String get findBhandarasDescription =>
+      'You can find bhandaras near your location.';
+
+  @override
+  String get hostABhandaraDescription =>
+      'You can host your own bhandaras so that more people can come.';
+
+  @override
+  String get allForFree => 'All For Free!';
+
+  @override
+  String get allForFreeDescription =>
+      'Find bhandaras, Host bhandaras, and more!';
 }

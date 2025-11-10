@@ -58,10 +58,18 @@ class _SettingsPageState extends State<SettingsPage> {
                   width: double.infinity,
                 ),
                 DropdownMenu(
-                  dropdownMenuEntries: [
-                    DropdownMenuEntry(value: "en", label: "English"),
-                    DropdownMenuEntry(value: "hi", label: "हिंदी"),
-                  ],
+                  dropdownMenuEntries: List.generate(
+                    Globals.supportedLanguages.length,
+                    (index) {
+                      return DropdownMenuEntry(
+                        value: Globals
+                            .supportedLanguages[index]
+                            .locale
+                            .languageCode,
+                        label: Globals.supportedLanguages[index].language,
+                      );
+                    },
+                  ),
                   initialSelection: Globals.currentLocale,
                   label: Text(AppLocalizations.of(context)!.language),
                   inputDecorationTheme: InputDecorationTheme(

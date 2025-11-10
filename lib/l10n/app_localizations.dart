@@ -101,7 +101,7 @@ abstract class AppLocalizations {
   /// No description provided for @grantPermission.
   ///
   /// In en, this message translates to:
-  /// **'Grand Permission'**
+  /// **'Grant Permission'**
   String get grantPermission;
 
   /// No description provided for @nearbyBhandaras.
@@ -385,6 +385,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Language'**
   String get language;
+
+  /// No description provided for @selectLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Language'**
+  String get selectLanguage;
+
+  /// No description provided for @findBhandaras.
+  ///
+  /// In en, this message translates to:
+  /// **'Find Bhandaras'**
+  String get findBhandaras;
+
+  /// No description provided for @findBhandarasDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'You can find bhandaras near your location.'**
+  String get findBhandarasDescription;
+
+  /// No description provided for @hostABhandaraDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'You can host your own bhandaras so that more people can come.'**
+  String get hostABhandaraDescription;
+
+  /// No description provided for @allForFree.
+  ///
+  /// In en, this message translates to:
+  /// **'All For Free!'**
+  String get allForFree;
+
+  /// No description provided for @allForFreeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Find bhandaras, Host bhandaras, and more!'**
+  String get allForFreeDescription;
 }
 
 class _AppLocalizationsDelegate

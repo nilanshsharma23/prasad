@@ -53,6 +53,7 @@ class MainApp extends StatelessWidget {
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [Locale('en'), Locale('hi')],
       locale: Locale(Provider.of<LanguageProvider>(context).currentLocale),

@@ -47,5 +47,11 @@
     "times": " बार",
     "signOut": "लोग आउट करें",
     "deleteAccount": "अकाउंट डिलीट करें",
-    "language": "भाषा"
+    "language": "भाषा",
+    "selectLanguage": "भाषा चुनिए",
+    "findBhandaras": "भंडारे ढूंढे",
+    "findBhandarasDescription": "आप अपने आस-पास भंडारे ढूंढ सकते है",
+    "hostABhandaraDescription": "आप खुद भंडारे आयोजित कर सकते है ताकि लोग आ सके",
+    "allForFree": "सब कुछ मुफ्त!",
+    "allForFreeDescription": "भंडारे ढूंढे, भंडारे आयोजित करें, और बहुत कुछ!"
 }

@@ -153,4 +153,24 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get language => 'भाषा';
+
+  @override
+  String get selectLanguage => 'भाषा चुनिए';
+
+  @override
+  String get findBhandaras => 'भंडारे ढूंढे';
+
+  @override
+  String get findBhandarasDescription => 'आप अपने आस-पास भंडारे ढूंढ सकते है';
+
+  @override
+  String get hostABhandaraDescription =>
+      'आप खुद भंडारे आयोजित कर सकते है ताकि लोग आ सके';
+
+  @override
+  String get allForFree => 'सब कुछ मुफ्त!';
+
+  @override
+  String get allForFreeDescription =>
+      'भंडारे ढूंढे, भंडारे आयोजित करें, और बहुत कुछ!';
 }

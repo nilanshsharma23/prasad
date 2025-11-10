@@ -41,11 +41,13 @@ class ListingContainer extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onSurface,
                   size: 32,
                 ),
-                Text(
-                  listingObject.address,
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: false,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                Expanded(
+                  child: Text(
+                    listingObject.address,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),

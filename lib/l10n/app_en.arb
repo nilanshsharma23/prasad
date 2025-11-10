@@ -1,6 +1,6 @@
 {
     "@@locale": "en",
-    "grantPermission": "Grand Permission",
+    "grantPermission": "Grant Permission",
     "@grantPermission": {},
     "nearbyBhandaras": "Nearby Bhandaras",
     "@nearbyBhandaras": {},
@@ -95,5 +95,17 @@
     "deleteAccount": "Delete Account",
     "@deleteAccount": {},
     "language": "Language",
-    "@language": {}
+    "@language": {},
+    "selectLanguage": "Select Language",
+    "@selectLanguage": {},
+    "findBhandaras": "Find Bhandaras",
+    "@findBhandaras": {},
+    "findBhandarasDescription": "You can find bhandaras near your location.",
+    "@findBhandarasDescription": {},
+    "hostABhandaraDescription": "You can host your own bhandaras so that more people can come.",
+    "@hostABhandaraDescription": {},
+    "allForFree": "All For Free!",
+    "@allForFree": {},
+    "allForFreeDescription": "Find bhandaras, Host bhandaras, and more!",
+    "@allForFreeDescription": {}
 }
