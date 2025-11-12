@@ -80,8 +80,6 @@ class _HostPageState extends State<HostPage> {
                                       setState(() {
                                         pickedLocationData = value;
                                       });
-
-                                      print(value.addressData);
                                     },
                                   ),
                                 ),

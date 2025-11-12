@@ -52,7 +52,8 @@ Future<List<ListingObject>> getListingsNearby({
       .lte('latitude', rightPoint.latitude)
       .gte('longitude', bottomPoint.longitude)
       .lte('longitude', topPoint.longitude)
-      .eq('status', 'accepted');
+      .eq('status', 'accepted')
+      .gte('date', DateTime.now().toIso8601String().split('T').first);
 
   for (var listing in data) {
     output.add(ListingObject.fromJson(listing));
