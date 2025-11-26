@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -15,6 +16,15 @@ Future<void> main() async {
   await Supabase.initialize(
     url: dotenv.get("SUPABASE_URL"),
     anonKey: dotenv.get('ANON_KEY'),
+  );
+
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: dotenv.get('FIREBASE_API_KEY'),
+      appId: dotenv.get('FIREBASE_APP_ID'),
+      messagingSenderId: dotenv.get('FIREBASE_MESSAGING_SENDER_ID'),
+      projectId: dotenv.get('FIREBASE_PROJECT_ID'),
+    ),
   );
 
   final SharedPreferences prefs = await SharedPreferences.getInstance();
