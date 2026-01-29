@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
@@ -63,7 +62,7 @@ class ListingContainer extends StatelessWidget {
                       size: 16,
                     ),
                     Text(
-                      DateFormat.Md().format(listingObject.date),
+                      "${listingObject.date.day}/${listingObject.date.month}",
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.onSecondary,
                       ),
