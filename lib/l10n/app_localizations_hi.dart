@@ -173,4 +173,32 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get allForFreeDescription =>
       'भंडारे ढूंढे, भंडारे आयोजित करें, और बहुत कुछ!';
+
+  @override
+  String get aboutUs => 'हमारे बारे में';
+
+  @override
+  String get prasad => 'प्रसाद';
+
+  @override
+  String get prasadDescription =>
+      'प्रसाद आपके आस-पास होने वाले भंडारों को ढूंढने का सबसे आसान तरीका है। चाहे वह लंगर हो, कम्युनिटी फीस्ट हो, या प्रसाद वितरण हो, हम आपको मुफ्त खाना ढूंढने में मदद करते हैं और साथ ही आपको आपके शहर में देने की भावना से जोड़ते हैं।';
+
+  @override
+  String get findFreeFood => 'मुफ्त खाना ढूंढें';
+
+  @override
+  String get findFreeFoodDescription =>
+      'अपने इलाके में भंडारों को मिस करना बंद करें। एक ही ऐप में मुफ्त खाने, समय और जगहों के बारे में नोटिफिकेशन पाएं। रोज़ाना के लंगर से लेकर खास मौकों की दावतों तक, बस कुछ ही टैप में अपने आस-पास प्रसाद ढूंढें।';
+
+  @override
+  String get hostABhandaraAboutDescription =>
+      'भंडारा कर रहे हैं? लोगों को बताएं। ज़्यादा भक्तों तक पहुँचें, अपनी सेवा का काम कम्युनिटी के साथ शेयर करें, और पक्का करें कि आपकी दरियादिली उन लोगों तक पहुँचे जो इसकी सबसे ज़्यादा कद्र करेंगे।';
+
+  @override
+  String get whyPrasad => 'प्रसाद क्यों?';
+
+  @override
+  String get whyPrasadDescription =>
+      'प्रसाद एक पुरानी परंपरा को आधुनिक युग में लाता है। क्योंकि अच्छा काम करना और अच्छा खाना मुश्किल नहीं होना चाहिए।';
 }

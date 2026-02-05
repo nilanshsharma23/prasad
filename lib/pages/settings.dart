@@ -95,28 +95,28 @@ class _SettingsPageState extends State<SettingsPage> {
                     }
                   },
                 ),
-                // SizedBox(
-                //   width: double.infinity,
-                //   child: TextButton(
-                //     onPressed: () {
-                //       context.push('/about');
-                //     },
-                //     style: TextButton.styleFrom(
-                //       shape: RoundedRectangleBorder(
-                //         borderRadius: BorderRadiusGeometry.circular(8),
-                //       ),
-                //     ),
-                //     child: Text(
-                //       "About Us",
-                //       style: TextStyle(
-                //         color: Theme.of(context).colorScheme.onSurface,
-                //         fontSize: 16,
-                //         fontWeight: FontWeight.normal,
-                //       ),
-                //       textAlign: TextAlign.start,
-                //     ),
-                //   ),
-                // ),
+                SizedBox(
+                  width: double.infinity,
+                  child: TextButton(
+                    onPressed: () {
+                      context.push('/about');
+                    },
+                    style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusGeometry.circular(8),
+                      ),
+                    ),
+                    child: Text(
+                      AppLocalizations.of(context)!.aboutUs,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
                 if (Globals.supabase.auth.currentUser != null)
                   SizedBox(
                     width: double.infinity,

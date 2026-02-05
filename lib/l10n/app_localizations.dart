@@ -421,6 +421,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Find bhandaras, Host bhandaras, and more!'**
   String get allForFreeDescription;
+
+  /// No description provided for @aboutUs.
+  ///
+  /// In en, this message translates to:
+  /// **'About Us'**
+  String get aboutUs;
+
+  /// No description provided for @prasad.
+  ///
+  /// In en, this message translates to:
+  /// **'Prasad'**
+  String get prasad;
+
+  /// No description provided for @prasadDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Prasad is the easiest way to find bhandaras happening near you. Whether it\'s a langar, community feast, or prasad distribution, we help you discover free meals while connecting you with the spirit of giving in your city.'**
+  String get prasadDescription;
+
+  /// No description provided for @findFreeFood.
+  ///
+  /// In en, this message translates to:
+  /// **'Find Free Food'**
+  String get findFreeFood;
+
+  /// No description provided for @findFreeFoodDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop missing out on bhandaras in your area. Get notified about free meals, timings, and locations—all in one app. From daily langars to special occasion feasts, find prasad near you with just a few taps.'**
+  String get findFreeFoodDescription;
+
+  /// No description provided for @hostABhandaraAboutDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Organizing a bhandara? Let people know. Reach more devotees, share your act of seva with the community, and make sure your generosity finds the people who\'ll appreciate it most.'**
+  String get hostABhandaraAboutDescription;
+
+  /// No description provided for @whyPrasad.
+  ///
+  /// In en, this message translates to:
+  /// **'Why Prasad?'**
+  String get whyPrasad;
+
+  /// No description provided for @whyPrasadDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Prasad brings an age-old tradition into the modern age. Because doing good and eating well shouldn\'t be complicated.'**
+  String get whyPrasadDescription;
 }
 
 class _AppLocalizationsDelegate

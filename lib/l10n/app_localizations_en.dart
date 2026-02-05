@@ -175,4 +175,32 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get allForFreeDescription =>
       'Find bhandaras, Host bhandaras, and more!';
+
+  @override
+  String get aboutUs => 'About Us';
+
+  @override
+  String get prasad => 'Prasad';
+
+  @override
+  String get prasadDescription =>
+      'Prasad is the easiest way to find bhandaras happening near you. Whether it\'s a langar, community feast, or prasad distribution, we help you discover free meals while connecting you with the spirit of giving in your city.';
+
+  @override
+  String get findFreeFood => 'Find Free Food';
+
+  @override
+  String get findFreeFoodDescription =>
+      'Stop missing out on bhandaras in your area. Get notified about free meals, timings, and locations—all in one app. From daily langars to special occasion feasts, find prasad near you with just a few taps.';
+
+  @override
+  String get hostABhandaraAboutDescription =>
+      'Organizing a bhandara? Let people know. Reach more devotees, share your act of seva with the community, and make sure your generosity finds the people who\'ll appreciate it most.';
+
+  @override
+  String get whyPrasad => 'Why Prasad?';
+
+  @override
+  String get whyPrasadDescription =>
+      'Prasad brings an age-old tradition into the modern age. Because doing good and eating well shouldn\'t be complicated.';
 }

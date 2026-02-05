@@ -107,5 +107,21 @@
     "allForFree": "All For Free!",
     "@allForFree": {},
     "allForFreeDescription": "Find bhandaras, Host bhandaras, and more!",
-    "@allForFreeDescription": {}
+    "@allForFreeDescription": {},
+    "aboutUs": "About Us",
+    "@aboutUs": {},
+    "prasad": "Prasad",
+    "@prasad": {},
+    "prasadDescription": "Prasad is the easiest way to find bhandaras happening near you. Whether it's a langar, community feast, or prasad distribution, we help you discover free meals while connecting you with the spirit of giving in your city.",
+    "@prasadDescription": {},
+    "findFreeFood": "Find Free Food",
+    "@findFreeFood": {},
+    "findFreeFoodDescription": "Stop missing out on bhandaras in your area. Get notified about free meals, timings, and locations—all in one app. From daily langars to special occasion feasts, find prasad near you with just a few taps.",
+    "@findFreeFoodDescription": {},
+    "hostABhandaraAboutDescription": "Organizing a bhandara? Let people know. Reach more devotees, share your act of seva with the community, and make sure your generosity finds the people who'll appreciate it most.",
+    "@hostABhandaraAboutDescription": {},
+    "whyPrasad": "Why Prasad?",
+    "@whyPrasad": {},
+    "whyPrasadDescription": "Prasad brings an age-old tradition into the modern age. Because doing good and eating well shouldn't be complicated.",
+    "@whyPrasadDescription": {}
 }
