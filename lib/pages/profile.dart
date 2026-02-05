@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/functions/get_profile_info.dart';
+import 'package:prasad/utils/widgets/banner_ad_template.dart';
 import 'package:prasad/utils/widgets/barriers/barrier_screen.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -53,6 +54,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(
                         AppLocalizations.of(context)!.thanksForHosting,
                         style: TextStyle(fontSize: 16),
+                      ),
+                      BannerAdTemplate(
+                        adUnitId: "ca-app-pub-3940256099942544/9214589741",
                       ),
                     ],
                   ),

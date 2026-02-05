@@ -12,6 +12,7 @@ import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/pages/pick_location.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/functions/show_error_dialog.dart';
+import 'package:prasad/utils/widgets/banner_ad_template.dart';
 import 'package:prasad/utils/widgets/barriers/barrier_screen.dart';
 import 'package:prasad/utils/widgets/barriers/location_permission_screen.dart';
 import 'package:time_range/time_range.dart';
@@ -442,6 +443,9 @@ class _HostPageState extends State<HostPage> {
                               ),
                             ),
                           ),
+                        ),
+                        BannerAdTemplate(
+                          adUnitId: "ca-app-pub-3940256099942544/9214589741",
                         ),
                       ],
                     ),

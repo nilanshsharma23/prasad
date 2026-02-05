@@ -8,6 +8,7 @@ import 'package:prasad/utils/enums/themes_enum.dart';
 import 'package:prasad/utils/functions/delete_account.dart';
 import 'package:prasad/utils/providers/color_scheme_provider.dart';
 import 'package:prasad/utils/providers/language_provider.dart';
+import 'package:prasad/utils/widgets/banner_ad_template.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -94,6 +95,28 @@ class _SettingsPageState extends State<SettingsPage> {
                     }
                   },
                 ),
+                // SizedBox(
+                //   width: double.infinity,
+                //   child: TextButton(
+                //     onPressed: () {
+                //       context.push('/about');
+                //     },
+                //     style: TextButton.styleFrom(
+                //       shape: RoundedRectangleBorder(
+                //         borderRadius: BorderRadiusGeometry.circular(8),
+                //       ),
+                //     ),
+                //     child: Text(
+                //       "About Us",
+                //       style: TextStyle(
+                //         color: Theme.of(context).colorScheme.onSurface,
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.normal,
+                //       ),
+                //       textAlign: TextAlign.start,
+                //     ),
+                //   ),
+                // ),
                 if (Globals.supabase.auth.currentUser != null)
                   SizedBox(
                     width: double.infinity,
@@ -166,6 +189,9 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                     ),
                   ),
+                BannerAdTemplate(
+                  adUnitId: "ca-app-pub-3940256099942544/9214589741",
+                ),
               ],
             ),
           ),

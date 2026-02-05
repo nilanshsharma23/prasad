@@ -9,6 +9,7 @@ import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/classes/listing_object.dart';
 import 'package:prasad/utils/functions/get_listings_nearby.dart';
+import 'package:prasad/utils/widgets/banner_ad_template.dart';
 import 'package:prasad/utils/widgets/barriers/barrier_screen.dart';
 import 'package:prasad/utils/widgets/listing_container.dart';
 import 'package:prasad/utils/widgets/barriers/location_permission_screen.dart';
@@ -24,12 +25,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late Future<List<ListingObject>> getListingsNearbyFuture;
   bool loading = false;
+  int currentDistance = 1;
 
   @override
   void initState() {
     super.initState();
+
     getListingsNearbyFuture = getListingsNearby(
-      distanceInKm: 1,
+      distanceInKm: currentDistance,
       onStartLoading: () {},
       onStopLoading: () {},
     );
@@ -105,8 +108,9 @@ class _HomePageState extends State<HomePage> {
                       width: double.infinity,
                       onSelected: (value) {
                         setState(() {
+                          currentDistance = value!;
                           getListingsNearbyFuture = getListingsNearby(
-                            distanceInKm: value!,
+                            distanceInKm: value,
                             onStartLoading: () {
                               setState(() {
                                 loading = true;
@@ -121,6 +125,9 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                     ),
+                  ),
+                  BannerAdTemplate(
+                    adUnitId: "ca-app-pub-3940256099942544/9214589741",
                   ),
                   FutureBuilder(
                     future: getListingsNearbyFuture,
@@ -220,7 +227,7 @@ class _HomePageState extends State<HomePage> {
                             onButtonPressed: () {
                               setState(() {
                                 getListingsNearbyFuture = getListingsNearby(
-                                  distanceInKm: 10,
+                                  distanceInKm: currentDistance,
                                   onStartLoading: () {
                                     setState(() {
                                       loading = true;

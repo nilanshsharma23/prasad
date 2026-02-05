@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:prasad/pages/about.dart';
 import 'package:prasad/pages/home.dart';
 import 'package:prasad/pages/host.dart';
 import 'package:prasad/pages/introduction.dart';
@@ -70,5 +71,6 @@ final router = GoRouter(
     ),
     GoRoute(path: '/settings', builder: (context, state) => SettingsPage()),
     GoRoute(path: '/sign-in', builder: (context, state) => SignInPage()),
+    GoRoute(path: '/about', builder: (context, state) => AboutPage()),
   ],
 );
