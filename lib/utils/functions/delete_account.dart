@@ -10,7 +10,7 @@ Future<void> deleteAccount({required String uid}) async {
       .from('proofs')
       .remove(
         List.generate(listingUidData.length, (index) {
-          return "$uid/${listingUidData[index]['uid']}.png";
+          return "$uid/${listingUidData[index]['uid']}.webp";
         }),
       );
 
