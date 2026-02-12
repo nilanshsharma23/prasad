@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   BannerAdTemplate(
-                    adUnitId: "ca-app-pub-3940256099942544/9214589741",
+                    adUnitId: "ca-app-pub-6056433400661212/1058362261",
                   ),
                   FutureBuilder(
                     future: getListingsNearbyFuture,

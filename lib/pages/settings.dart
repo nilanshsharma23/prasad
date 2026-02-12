@@ -190,7 +190,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                 BannerAdTemplate(
-                  adUnitId: "ca-app-pub-3940256099942544/9214589741",
+                  adUnitId: "ca-app-pub-6056433400661212/7230950570",
                 ),
               ],
             ),

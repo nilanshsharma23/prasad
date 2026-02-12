@@ -5,6 +5,7 @@ import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/classes/listing_object.dart';
 import 'package:prasad/utils/functions/get_clicks.dart';
 import 'package:prasad/utils/functions/get_status_color.dart';
+import 'package:prasad/utils/widgets/primary_button.dart';
 
 class ListingContainer extends StatelessWidget {
   const ListingContainer({
@@ -160,7 +161,7 @@ class ListingContainer extends StatelessWidget {
                   }
                 },
               ),
-            TextButton(
+            PrimaryButton(
               onPressed: () async {
                 onStartToLoad!();
 
@@ -182,23 +183,7 @@ class ListingContainer extends StatelessWidget {
                   listingObject.latLong.longitude,
                 );
               },
-              style: TextButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadiusGeometry.circular(8),
-                ),
-              ),
-              child: SizedBox(
-                width: double.infinity,
-                child: Text(
-                  AppLocalizations.of(context)!.takeMeThere,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  ),
-                ),
-              ),
+              text: AppLocalizations.of(context)!.takeMeThere,
             ),
           ],
         ),

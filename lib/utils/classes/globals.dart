@@ -13,4 +13,5 @@ class Globals {
     LanguageObject(locale: Locale('en'), language: "English"),
     LanguageObject(locale: Locale('hi'), language: 'हिंदी'),
   ];
+  static String? currentFcmToken;
 }

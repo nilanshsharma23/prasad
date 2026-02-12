@@ -4,7 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:otp_autofill/otp_autofill.dart';
 import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
+import 'package:prasad/utils/functions/set_fcm_token.dart';
 import 'package:prasad/utils/functions/show_error_dialog.dart';
+import 'package:prasad/utils/widgets/primary_button.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignInPage extends StatefulWidget {
@@ -82,58 +84,46 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       SizedBox(
                         width: double.infinity,
-                        child: TextButton(
+                        child: PrimaryButton(
                           onPressed: () async {
-                            if (phoneNumberFormKey.currentState!.validate()) {
-                              setState(() {
-                                loading = true;
-                              });
-
-                              await Globals.supabase.auth.signInWithOtp(
-                                phone: "+91${mobileNumberController.text}",
-                              );
-
-                              setState(() {
-                                loading = false;
-                              });
-
-                              pageController.animateToPage(
-                                1,
-                                duration: Durations.medium1,
-                                curve: Curves.bounceInOut,
-                              );
-
-                              setState(() {
-                                otpController =
-                                    OTPTextEditController(
-                                      codeLength: 6,
-                                      onCodeReceive: (code) {
-                                        setState(() {
-                                          otpController.text = code;
-                                        });
-                                      },
-                                    )..startListenUserConsent((code) {
-                                      final exp = RegExp(r'(\d{6})');
-                                      return exp.stringMatch(code ?? '') ?? '';
-                                    });
-                              });
+                            if (!phoneNumberFormKey.currentState!.validate()) {
+                              return;
                             }
+
+                            setState(() {
+                              loading = true;
+                            });
+
+                            await Globals.supabase.auth.signInWithOtp(
+                              phone: "+91${mobileNumberController.text}",
+                            );
+
+                            setState(() {
+                              loading = false;
+                            });
+
+                            pageController.animateToPage(
+                              1,
+                              duration: Durations.medium1,
+                              curve: Curves.bounceInOut,
+                            );
+
+                            setState(() {
+                              otpController =
+                                  OTPTextEditController(
+                                    codeLength: 6,
+                                    onCodeReceive: (code) {
+                                      setState(() {
+                                        otpController.text = code;
+                                      });
+                                    },
+                                  )..startListenUserConsent((code) {
+                                    final exp = RegExp(r'(\d{6})');
+                                    return exp.stringMatch(code ?? '') ?? '';
+                                  });
+                            });
                           },
-                          style: TextButton.styleFrom(
-                            backgroundColor: Theme.of(
-                              context,
-                            ).colorScheme.primary,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadiusGeometry.circular(8),
-                            ),
-                          ),
-                          child: Text(
-                            AppLocalizations.of(context)!.sendOTP,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            ),
-                          ),
+                          text: AppLocalizations.of(context)!.sendOTP,
                         ),
                       ),
                     ],
@@ -186,67 +176,52 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       SizedBox(
                         width: double.infinity,
-                        child: TextButton(
+                        child: PrimaryButton(
                           onPressed: () async {
-                            if (otpFormKey.currentState!.validate()) {
-                              setState(() {
-                                loading = true;
-                              });
+                            if (!otpFormKey.currentState!.validate()) return;
 
-                              try {
-                                final AuthResponse response = await Globals
-                                    .supabase
-                                    .auth
-                                    .verifyOTP(
-                                      type: OtpType.sms,
-                                      phone:
-                                          "+91${mobileNumberController.text}",
-                                      token: otpController.text,
-                                    );
+                            setState(() {
+                              loading = true;
+                            });
 
-                                Globals.currentUser = response.user;
-
-                                final data = await Globals.supabase
-                                    .from('users')
-                                    .select()
-                                    .eq('user_id', response.user!.id);
-
-                                if (data.isNotEmpty) {
-                                  if (context.mounted) {
-                                    context.go('/');
-                                  }
-                                } else {
-                                  pageController.animateToPage(
-                                    2,
-                                    duration: Durations.medium1,
-                                    curve: Curves.bounceInOut,
+                            try {
+                              final AuthResponse response = await Globals
+                                  .supabase
+                                  .auth
+                                  .verifyOTP(
+                                    type: OtpType.sms,
+                                    phone: "+91${mobileNumberController.text}",
+                                    token: otpController.text,
                                   );
-                                }
-                              } catch (e) {
+
+                              Globals.currentUser = response.user;
+
+                              final data = await Globals.supabase
+                                  .from('users')
+                                  .select()
+                                  .eq('user_id', response.user!.id);
+
+                              if (data.isNotEmpty) {
                                 if (context.mounted) {
-                                  showErrorDialog(context, e.toString());
+                                  context.go('/');
                                 }
+                              } else {
+                                pageController.animateToPage(
+                                  2,
+                                  duration: Durations.medium1,
+                                  curve: Curves.bounceInOut,
+                                );
                               }
-                              setState(() {
-                                loading = false;
-                              });
+                            } catch (e) {
+                              if (context.mounted) {
+                                showErrorDialog(context, e.toString());
+                              }
                             }
+                            setState(() {
+                              loading = false;
+                            });
                           },
-                          style: TextButton.styleFrom(
-                            backgroundColor: Theme.of(
-                              context,
-                            ).colorScheme.primary,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadiusGeometry.circular(8),
-                            ),
-                          ),
-                          child: Text(
-                            AppLocalizations.of(context)!.continueOn,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            ),
-                          ),
+                          text: AppLocalizations.of(context)!.continueOn,
                         ),
                       ),
                     ],
@@ -281,38 +256,28 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       SizedBox(
                         width: double.infinity,
-                        child: TextButton(
+                        child: PrimaryButton(
                           onPressed: () async {
-                            if (nameFormKey.currentState!.validate()) {
-                              setState(() {
-                                loading = true;
-                              });
+                            if (!nameFormKey.currentState!.validate()) return;
 
-                              await Globals.supabase.from('users').insert({
-                                "user_id": Globals.currentUser!.id,
-                                "name": nameController.text,
-                              });
+                            setState(() {
+                              loading = true;
+                            });
 
-                              if (context.mounted) {
-                                context.go("/");
-                              }
+                            await Globals.supabase.from('users').insert({
+                              "user_id": Globals.currentUser!.id,
+                              "name": nameController.text,
+                            });
+
+                            if (Globals.currentFcmToken != null) {
+                              setFcmToken(Globals.currentFcmToken!);
+                            }
+
+                            if (context.mounted) {
+                              context.go("/");
                             }
                           },
-                          style: TextButton.styleFrom(
-                            backgroundColor: Theme.of(
-                              context,
-                            ).colorScheme.primary,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadiusGeometry.circular(8),
-                            ),
-                          ),
-                          child: Text(
-                            AppLocalizations.of(context)!.continueOn,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            ),
-                          ),
+                          text: AppLocalizations.of(context)!.continueOn,
                         ),
                       ),
                     ],

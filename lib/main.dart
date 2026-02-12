@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
+import 'package:prasad/utils/functions/set_fcm_token.dart';
 import 'package:prasad/utils/providers/color_scheme_provider.dart';
 import 'package:prasad/utils/providers/language_provider.dart';
 import 'package:prasad/utils/router.dart';
@@ -45,12 +46,10 @@ Future<void> main() async {
       await FirebaseMessaging.instance.requestPermission();
 
       final String? fcmToken = await FirebaseMessaging.instance.getToken();
+      Globals.currentFcmToken = fcmToken;
 
       if (fcmToken != null) {
-        await Globals.supabase
-            .from('users')
-            .update({'fcm_token': fcmToken})
-            .eq('user_id', Globals.supabase.auth.currentUser!.id);
+        setFcmToken(fcmToken);
       }
     }
   });

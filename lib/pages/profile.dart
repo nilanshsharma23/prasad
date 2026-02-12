@@ -56,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         style: TextStyle(fontSize: 16),
                       ),
                       BannerAdTemplate(
-                        adUnitId: "ca-app-pub-3940256099942544/9214589741",
+                        adUnitId: "ca-app-pub-6056433400661212/8203550651",
                       ),
                     ],
                   ),
