@@ -50,8 +50,18 @@ class MainNavigationBar extends StatelessWidget {
           ),
         ),
         NavigationDestination(
+          icon: Icon(Icons.store_outlined, size: 32),
+          label: AppLocalizations.of(context)!.myBhandaras,
+          selectedIcon: Icon(
+            Icons.store,
+            color: Theme.of(context).colorScheme.onPrimary,
+            size: 32,
+          ),
+        ),
+        NavigationDestination(
           icon: Icon(Icons.person_outline, size: 32),
           label: "Profile",
+
           selectedIcon: Icon(
             Icons.person,
             color: Theme.of(context).colorScheme.onPrimary,

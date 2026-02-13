@@ -9,6 +9,7 @@ import 'package:prasad/pages/my_listings.dart';
 import 'package:prasad/pages/profile.dart';
 import 'package:prasad/pages/settings.dart';
 import 'package:prasad/pages/sign_in.dart';
+import 'package:prasad/pages/vendors.dart';
 import 'package:prasad/utils/widgets/navigation/navigation_scaffold.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,6 +45,11 @@ final router = GoRouter(
           parentNavigatorKey: shellNavigatorKey,
           path: '/my-listings',
           builder: (context, state) => MyListingsPage(),
+        ),
+        GoRoute(
+          parentNavigatorKey: shellNavigatorKey,
+          path: '/vendors',
+          builder: (context, state) => VendorsPage(),
         ),
         GoRoute(
           parentNavigatorKey: shellNavigatorKey,
