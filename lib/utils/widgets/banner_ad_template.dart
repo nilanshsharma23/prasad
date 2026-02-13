@@ -12,6 +12,7 @@ class BannerAdTemplate extends StatefulWidget {
 
 class _BannerAdTemplateState extends State<BannerAdTemplate> {
   BannerAd? bannerAd;
+  bool? adFailedToLoad;
 
   @override
   void didChangeDependencies() {
@@ -40,6 +41,11 @@ class _BannerAdTemplateState extends State<BannerAdTemplate> {
         },
         onAdFailedToLoad: (ad, error) {
           debugPrint("Ad failed to load with error: $error");
+
+          setState(() {
+            adFailedToLoad = true;
+          });
+
           ad.dispose();
         },
       ),
@@ -47,13 +53,17 @@ class _BannerAdTemplateState extends State<BannerAdTemplate> {
     );
 
     if (bannerAd != null) {
-      bannerAd!.load();
+      await bannerAd!.load();
+
+      setState(() {
+        adFailedToLoad = false;
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (bannerAd != null) {
+    if (bannerAd != null && adFailedToLoad != null && adFailedToLoad == false) {
       return Column(
         children: [
           SizedBox(height: 32),

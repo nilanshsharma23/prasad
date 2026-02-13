@@ -28,11 +28,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
         pages: [
           PageViewModel(
             title: AppLocalizations.of(context)!.selectLanguage,
-            image: Image.asset(
-              'assets/introduction/language_select.png',
-              color: Theme.of(context).colorScheme.onSurface,
-              colorBlendMode: BlendMode.modulate,
-            ),
+            image: Image.asset('assets/introduction/language_select.png'),
             bodyWidget: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(Globals.supportedLanguages.length, (
@@ -86,25 +82,17 @@ class _IntroductionPageState extends State<IntroductionPage> {
           PageViewModel(
             title: AppLocalizations.of(context)!.findBhandaras,
             body: AppLocalizations.of(context)!.findBhandarasDescription,
-            image: Image.asset(
-              'assets/introduction/find_bhandaras.png',
-              color: Theme.of(context).colorScheme.onSurface,
-              colorBlendMode: BlendMode.modulate,
-            ),
+            image: Image.asset('assets/introduction/find_bhandaras.png'),
           ),
           PageViewModel(
             title: AppLocalizations.of(context)!.hostABhandara,
             body: AppLocalizations.of(context)!.hostABhandaraDescription,
-            image: Image.asset('assets/logo.png'),
+            image: Image.asset('assets/introduction/host_bhandaras.png'),
           ),
           PageViewModel(
             title: AppLocalizations.of(context)!.allForFree,
             body: AppLocalizations.of(context)!.allForFreeDescription,
-            image: Image.asset(
-              'assets/introduction/all_for_free.png',
-              color: Theme.of(context).colorScheme.onSurface,
-              colorBlendMode: BlendMode.modulate,
-            ),
+            image: Image.asset('assets/introduction/all_for_free.png'),
           ),
         ],
         showSkipButton: true,
