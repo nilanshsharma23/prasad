@@ -6,7 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
-import 'package:prasad/utils/functions/set_fcm_token.dart';
+import 'package:prasad/utils/functions/auth/set_fcm_token.dart';
 import 'package:prasad/utils/providers/color_scheme_provider.dart';
 import 'package:prasad/utils/providers/language_provider.dart';
 import 'package:prasad/utils/router.dart';

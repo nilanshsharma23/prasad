@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:prasad/utils/classes/vendor_object.dart';
+import 'package:prasad/utils/functions/helpers/get_average_rating.dart';
+import 'package:prasad/utils/functions/helpers/get_distance_between.dart';
 import 'package:prasad/utils/widgets/primary_button.dart';
 
 class VendorContainer extends StatelessWidget {
-  const VendorContainer({super.key});
+  const VendorContainer({super.key, required this.vendorObject});
+
+  final VendorObject vendorObject;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +33,7 @@ class VendorContainer extends StatelessWidget {
                   size: 32,
                 ),
                 Text(
-                  "PRASAD BHANDARA VENDORS",
+                  vendorObject.name,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -42,7 +47,7 @@ class VendorContainer extends StatelessWidget {
                   size: 32,
                 ),
                 Text(
-                  "1.2km",
+                  "${getDistanceBetween(vendorObject.latLong).toStringAsFixed(2)}km",
                   style: TextStyle(
                     fontSize: 16,
                     color: Theme.of(context).colorScheme.onSecondary,
@@ -59,7 +64,7 @@ class VendorContainer extends StatelessWidget {
                   size: 32,
                 ),
                 Text(
-                  "~300",
+                  vendorObject.rate.toString(),
                   style: TextStyle(
                     fontSize: 16,
                     color: Theme.of(context).colorScheme.onSecondary,
@@ -84,9 +89,17 @@ class VendorContainer extends StatelessWidget {
                     "Services",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  Text("Food", style: TextStyle(fontSize: 16)),
-                  Text("Tent", style: TextStyle(fontSize: 16)),
-                  Text("More", style: TextStyle(fontSize: 16)),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 4,
+                    children: List.generate(
+                      vendorObject.services.length,
+                      (index) => Text(
+                        vendorObject.services[index],
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -99,10 +112,14 @@ class VendorContainer extends StatelessWidget {
               },
               itemCount: 5,
               itemSize: 50,
-
-              rating: 2.8,
+              rating: getAverageRating(vendorObject.ratings),
             ),
-            Text("300 Ratings", style: TextStyle(fontSize: 16)),
+            Text(
+              vendorObject.ratings.isNotEmpty
+                  ? "${vendorObject.ratings.length} ratings"
+                  : "No ratings",
+              style: TextStyle(fontSize: 16),
+            ),
             PrimaryButton(onPressed: () {}, text: "Know More"),
           ],
         ),

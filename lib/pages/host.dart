@@ -6,15 +6,15 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:location/location.dart';
 import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
 import 'package:prasad/l10n/app_localizations.dart';
-import 'package:prasad/pages/pick_location.dart';
 import 'package:prasad/utils/classes/globals.dart';
+import 'package:prasad/utils/functions/helpers/get_address.dart';
 import 'package:prasad/utils/functions/show_error_dialog.dart';
 import 'package:prasad/utils/widgets/banner_ad_template.dart';
 import 'package:prasad/utils/widgets/barriers/barrier_screen.dart';
 import 'package:prasad/utils/widgets/barriers/location_permission_screen.dart';
+import 'package:prasad/utils/widgets/pick_location_button.dart';
 import 'package:time_range/time_range.dart';
 
 class HostPage extends StatefulWidget {
@@ -57,66 +57,23 @@ class _HostPageState extends State<HostPage> {
                             fontSize: 32,
                           ),
                         ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              setState(() {
-                                loading = true;
-                              });
-
-                              Location location = Location();
-                              LocationData locationData = await location
-                                  .getLocation();
-
-                              Navigator.push(
-                                mounted ? context : context,
-                                MaterialPageRoute(
-                                  builder: (context) => PickLocationPage(
-                                    currentLocation: LatLong(
-                                      locationData.latitude!,
-                                      locationData.longitude!,
-                                    ),
-                                    onLocationPicked: (value) {
-                                      setState(() {
-                                        pickedLocationData = value;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              );
-
-                              setState(() {
-                                loading = false;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadiusGeometry.circular(8),
-                                side: BorderSide(
-                                  color: Theme.of(context).colorScheme.outline,
-                                ),
-                              ),
-                              shadowColor: Colors.transparent,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Text(
-                                pickedLocationData != null
-                                    ? pickedLocationData!.address
-                                    : AppLocalizations.of(
-                                        context,
-                                      )!.selectLocation,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.onSurface,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
+                        PickLocationButton(
+                          pickedLocationData: pickedLocationData,
+                          onLocationPicked: (value) {
+                            setState(() {
+                              pickedLocationData = value;
+                            });
+                          },
+                          onStart: () {
+                            setState(() {
+                              loading = true;
+                            });
+                          },
+                          onStop: () {
+                            setState(() {
+                              loading = false;
+                            });
+                          },
                         ),
                         SizedBox(
                           width: double.infinity,
@@ -353,40 +310,6 @@ class _HostPageState extends State<HostPage> {
                                   loading = true;
                                 });
 
-                                String address = "";
-
-                                if (pickedLocationData!
-                                        .addressData['amenity'] !=
-                                    null) {
-                                  address +=
-                                      "${pickedLocationData!.addressData['amenity']}, ";
-                                }
-
-                                if (pickedLocationData!.addressData['road'] !=
-                                    null) {
-                                  address +=
-                                      "${pickedLocationData!.addressData['road']}, ";
-                                }
-
-                                if (pickedLocationData!.addressData['suburb'] !=
-                                    null) {
-                                  address +=
-                                      "${pickedLocationData!.addressData['suburb']}, ";
-                                }
-
-                                if (pickedLocationData!
-                                        .addressData['amenity'] !=
-                                    null) {
-                                  address +=
-                                      "${pickedLocationData!.addressData['city']}, ";
-                                }
-
-                                if (pickedLocationData!.addressData['state'] !=
-                                    null) {
-                                  address +=
-                                      "${pickedLocationData!.addressData['state']}";
-                                }
-
                                 var data = await Globals.supabase
                                     .from('listings')
                                     .insert({
@@ -406,7 +329,9 @@ class _HostPageState extends State<HostPage> {
                                       'people': int.parse(
                                         noOfPeopleController.text,
                                       ),
-                                      'address': address,
+                                      'address': getAddress(
+                                        pickedLocationData!,
+                                      ),
                                     })
                                     .select('host, uid')
                                     .single();

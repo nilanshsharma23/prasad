@@ -1,22 +1,21 @@
+import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
 import 'package:prasad/utils/classes/rating_object.dart';
 
 class VendorObject {
   final String uid;
   final String name;
   final double rate;
-  final double latitude;
-  final double longitude;
   final List<String> services;
   final List<RatingObject> ratings;
+  final LatLong latLong;
 
   const VendorObject({
     required this.uid,
     required this.name,
     required this.rate,
-    required this.latitude,
-    required this.longitude,
     required this.services,
     required this.ratings,
+    required this.latLong,
   });
 
   factory VendorObject.fromJson(Map<String, dynamic> data) {
@@ -35,9 +34,8 @@ class VendorObject {
     return VendorObject(
       uid: data['uid'],
       name: data['name'],
-      rate: data['rate'],
-      latitude: data['latitude'],
-      longitude: data['longitude'],
+      rate: double.parse(data['rate'].toString()),
+      latLong: LatLong(data['latitude'], data['longitude']),
       services: services,
       ratings: ratings,
     );

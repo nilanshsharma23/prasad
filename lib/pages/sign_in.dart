@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:otp_autofill/otp_autofill.dart';
 import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
-import 'package:prasad/utils/functions/set_fcm_token.dart';
+import 'package:prasad/utils/functions/auth/set_fcm_token.dart';
 import 'package:prasad/utils/functions/show_error_dialog.dart';
 import 'package:prasad/utils/widgets/primary_button.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

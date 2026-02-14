@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_map_math/flutter_geo_math.dart';
 import 'package:location/location.dart';
 import 'package:prasad/utils/classes/globals.dart';
@@ -51,8 +50,6 @@ Future<List<VendorObject>> getVendorsNearby() async {
   for (var vendor in data) {
     output.add(VendorObject.fromJson(vendor));
   }
-
-  debugPrint(output.toString());
 
   return output;
 }

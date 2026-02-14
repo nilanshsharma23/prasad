@@ -3,8 +3,8 @@ import 'package:maps_launcher/maps_launcher.dart';
 import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/classes/listing_object.dart';
-import 'package:prasad/utils/functions/get_clicks.dart';
-import 'package:prasad/utils/functions/get_status_color.dart';
+import 'package:prasad/utils/functions/helpers/get_clicks.dart';
+import 'package:prasad/utils/functions/helpers/get_status_color.dart';
 import 'package:prasad/utils/widgets/primary_button.dart';
 
 class ListingContainer extends StatelessWidget {

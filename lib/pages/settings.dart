@@ -5,7 +5,7 @@ import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/color_schemes.dart';
 import 'package:prasad/utils/enums/themes_enum.dart';
-import 'package:prasad/utils/functions/delete_account.dart';
+import 'package:prasad/utils/functions/auth/delete_account.dart';
 import 'package:prasad/utils/providers/color_scheme_provider.dart';
 import 'package:prasad/utils/providers/language_provider.dart';
 import 'package:prasad/utils/widgets/banner_ad_template.dart';

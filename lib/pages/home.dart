@@ -1,13 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_map_math/flutter_geo_math.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:prasad/l10n/app_localizations.dart';
-import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/classes/listing_object.dart';
+import 'package:prasad/utils/functions/helpers/get_distance_between.dart';
 import 'package:prasad/utils/functions/get_listings_nearby.dart';
 import 'package:prasad/utils/widgets/banner_ad_template.dart';
 import 'package:prasad/utils/widgets/barriers/barrier_screen.dart';
@@ -137,17 +136,9 @@ class _HomePageState extends State<HomePage> {
                           List<double> distances = List.generate(
                             asyncSnapshot.data!.length,
                             (index) {
-                              return FlutterMapMath.distanceBetween(
-                                    Globals.currentLocation!.latitude!,
-                                    Globals.currentLocation!.longitude!,
-                                    asyncSnapshot.data![index].latLong.latitude,
-                                    asyncSnapshot
-                                        .data![index]
-                                        .latLong
-                                        .longitude,
-                                    "kilometers",
-                                  ) /
-                                  1000;
+                              return getDistanceBetween(
+                                asyncSnapshot.data![index].latLong,
+                              );
                             },
                           );
 
