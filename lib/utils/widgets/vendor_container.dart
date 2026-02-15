@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 import 'package:prasad/utils/classes/vendor_object.dart';
 import 'package:prasad/utils/functions/helpers/get_average_rating.dart';
 import 'package:prasad/utils/functions/helpers/get_distance_between.dart';
@@ -120,7 +121,12 @@ class VendorContainer extends StatelessWidget {
                   : "No ratings",
               style: TextStyle(fontSize: 16),
             ),
-            PrimaryButton(onPressed: () {}, text: "Know More"),
+            PrimaryButton(
+              onPressed: () {
+                context.push('/vendors/${vendorObject.uid}');
+              },
+              text: "Know More",
+            ),
           ],
         ),
       ),

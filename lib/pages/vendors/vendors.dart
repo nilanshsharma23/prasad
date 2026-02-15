@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:prasad/utils/classes/globals.dart';
-import 'package:prasad/utils/functions/get_vendors_nearby.dart';
+import 'package:prasad/utils/functions/vendors/get_vendors_nearby.dart';
 import 'package:prasad/utils/widgets/barriers/location_permission_screen.dart';
 import 'package:prasad/utils/widgets/vendor_container.dart';
 
@@ -37,6 +37,7 @@ class VendorsPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(32.0),
                   child: Column(
+                    spacing: 16,
                     children: List.generate(asyncSnapshot.data!.length, (
                       index,
                     ) {

@@ -3,9 +3,12 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
 import 'package:prasad/l10n/app_localizations.dart';
+import 'package:prasad/utils/classes/globals.dart';
+import 'package:prasad/utils/classes/vendor_object.dart';
 import 'package:prasad/utils/functions/show_error_dialog.dart';
 import 'package:prasad/utils/widgets/pick_location_button.dart';
 
@@ -32,12 +35,12 @@ class _AddVendorPageState extends State<AddVendorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: Stack(
-            children: [
-              Form(
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: Form(
                 key: formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,6 +106,12 @@ class _AddVendorPageState extends State<AddVendorPage> {
                           return AppLocalizations.of(
                             context,
                           )!.pleaseEnterSomething;
+                        }
+
+                        if (value.length != 10) {
+                          return AppLocalizations.of(
+                            context,
+                          )!.tenDigitMobileNumber;
                         }
 
                         return null;
@@ -350,20 +359,13 @@ class _AddVendorPageState extends State<AddVendorPage> {
                       keyboardType: TextInputType.multiline,
                       minLines: 4,
                       maxLines: 6,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppLocalizations.of(
-                            context,
-                          )!.pleaseEnterSomething;
-                        }
-
-                        return null;
-                      },
                     ),
                     SizedBox(
                       width: double.infinity,
                       child: TextButton(
-                        onPressed: () {
+                        onPressed: () async {
+                          if (!formKey.currentState!.validate()) return;
+
                           if (pickedLocationData == null) {
                             showErrorDialog(
                               context,
@@ -373,13 +375,57 @@ class _AddVendorPageState extends State<AddVendorPage> {
                             return;
                           }
 
+                          if (services.isEmpty) {
+                            showErrorDialog(context, "Add some services.");
+
+                            return;
+                          }
+
                           setState(() {
                             loading = true;
                           });
 
+                          var data = await Globals.supabase
+                              .from('vendors')
+                              .insert(
+                                VendorObject(
+                                  uid: '',
+                                  name: nameController.text,
+                                  rate: rateController.text,
+                                  mobile: numberController.text,
+                                  description: descriptionController.text,
+                                  services: services,
+                                  ratings: [],
+                                  latLong: pickedLocationData!.latLong,
+                                ).toJson(),
+                              )
+                              .select('uid')
+                              .single();
+
+                          for (var i = 0; i < images.length; i++) {
+                            await Globals.supabase.storage
+                                .from('vendors')
+                                .uploadBinary(
+                                  '${data['uid']}/$i.webp',
+                                  images[i],
+                                );
+                          }
+
                           setState(() {
                             loading = false;
                           });
+
+                          if (context.mounted) {
+                            await showErrorDialog(
+                              context,
+                              "Your vendor listing has been created",
+                              title: AppLocalizations.of(context)!.success,
+                            );
+                          }
+
+                          if (context.mounted) {
+                            context.go('/vendors');
+                          }
                         },
                         style: TextButton.styleFrom(
                           backgroundColor: Theme.of(
@@ -401,24 +447,24 @@ class _AddVendorPageState extends State<AddVendorPage> {
                   ],
                 ),
               ),
-              if (loading)
-                Center(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(100, 0, 0, 0),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    width: 50,
-                    height: 50,
-                    child: SpinKitThreeBounce(
-                      color: Theme.of(context).colorScheme.primary,
-                      size: 16,
-                    ),
-                  ),
-                ),
-            ],
+            ),
           ),
-        ),
+          if (loading)
+            Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(100, 0, 0, 0),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                width: 100,
+                height: 100,
+                child: SpinKitThreeBounce(
+                  color: Theme.of(context).colorScheme.primary,
+                  size: 32,
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }

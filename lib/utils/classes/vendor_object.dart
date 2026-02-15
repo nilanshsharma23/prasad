@@ -4,7 +4,9 @@ import 'package:prasad/utils/classes/rating_object.dart';
 class VendorObject {
   final String uid;
   final String name;
-  final double rate;
+  final String description;
+  final String rate;
+  final String mobile;
   final List<String> services;
   final List<RatingObject> ratings;
   final LatLong latLong;
@@ -13,6 +15,8 @@ class VendorObject {
     required this.uid,
     required this.name,
     required this.rate,
+    required this.mobile,
+    required this.description,
     required this.services,
     required this.ratings,
     required this.latLong,
@@ -34,10 +38,30 @@ class VendorObject {
     return VendorObject(
       uid: data['uid'],
       name: data['name'],
-      rate: double.parse(data['rate'].toString()),
+      description: data['description'],
+      rate: data['rate'],
+      mobile: data['mobile'],
       latLong: LatLong(data['latitude'], data['longitude']),
       services: services,
       ratings: ratings,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    List<Map<String, dynamic>> ratingsJson = List.generate(
+      ratings.length,
+      (index) => ratings[index].toJson(),
+    );
+
+    return {
+      'name': name,
+      'description': description,
+      'services': services,
+      'ratings': ratingsJson,
+      'rate': rate,
+      'mobile': mobile,
+      'latitude': latLong.latitude,
+      'longitude': latLong.longitude,
+    };
   }
 }

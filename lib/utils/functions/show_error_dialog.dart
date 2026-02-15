@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:prasad/l10n/app_localizations.dart';
 
-void showErrorDialog(BuildContext context, String errorMessage) {
-  showDialog(
+Future<void> showErrorDialog(
+  BuildContext context,
+  String errorMessage, {
+  String title = "Error",
+}) async {
+  await showDialog(
     context: context,
     builder: (context) => AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      title: const Text("Error"),
+      title: Text(title),
       content: Text(errorMessage),
       actions: [
         TextButton(

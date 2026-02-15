@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:prasad/pages/about.dart';
-import 'package:prasad/pages/add_vendor.dart';
+import 'package:prasad/pages/vendors/add_vendor.dart';
 import 'package:prasad/pages/home.dart';
-import 'package:prasad/pages/host.dart';
+import 'package:prasad/pages/listings/host.dart';
 import 'package:prasad/pages/introduction.dart';
-import 'package:prasad/pages/listing_created.dart';
-import 'package:prasad/pages/my_listings.dart';
-import 'package:prasad/pages/profile.dart';
+import 'package:prasad/pages/listings/listing_created.dart';
+import 'package:prasad/pages/listings/my_listings.dart';
+import 'package:prasad/pages/profile/profile.dart';
 import 'package:prasad/pages/settings.dart';
-import 'package:prasad/pages/sign_in.dart';
-import 'package:prasad/pages/vendors.dart';
+import 'package:prasad/pages/profile/sign_in.dart';
+import 'package:prasad/pages/vendors/know_more.dart';
+import 'package:prasad/pages/vendors/vendors.dart';
 import 'package:prasad/utils/widgets/navigation/navigation_scaffold.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -51,6 +52,13 @@ final router = GoRouter(
           parentNavigatorKey: shellNavigatorKey,
           path: '/vendors',
           builder: (context, state) => VendorsPage(),
+          routes: [
+            GoRoute(
+              path: ':uid',
+              builder: (context, state) =>
+                  KnowMorePage(uid: state.pathParameters['uid']!),
+            ),
+          ],
         ),
         GoRoute(
           parentNavigatorKey: shellNavigatorKey,
