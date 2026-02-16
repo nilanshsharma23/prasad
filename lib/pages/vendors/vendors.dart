@@ -12,12 +12,6 @@ class VendorsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Vendors Near Me",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           context.push(
@@ -29,42 +23,44 @@ class VendorsPage extends StatelessWidget {
         child: Icon(Icons.add),
       ),
       body: LocationPermissionScreen(
-        child: FutureBuilder(
-          future: getVendorsNearby(),
-          builder: (context, asyncSnapshot) {
-            if (asyncSnapshot.hasData) {
-              return SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(32.0),
-                  child: Column(
-                    spacing: 16,
-                    children: List.generate(asyncSnapshot.data!.length, (
-                      index,
-                    ) {
-                      return VendorContainer(
-                        vendorObject: asyncSnapshot.data![index],
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Column(
+              spacing: 32,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Vendors Near Me",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
+                ),
+                FutureBuilder(
+                  future: getVendorsNearby(),
+                  builder: (context, asyncSnapshot) {
+                    if (asyncSnapshot.hasData) {
+                      return Column(
+                        spacing: 16,
+                        children: List.generate(asyncSnapshot.data!.length, (
+                          index,
+                        ) {
+                          return VendorContainer(
+                            vendorObject: asyncSnapshot.data![index],
+                          );
+                        }),
                       );
-                    }),
-                  ),
+                    } else {
+                      return Center(
+                        child: SpinKitThreeBounce(
+                          size: 32,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      );
+                    }
+                  },
                 ),
-              );
-            } else {
-              return Center(
-                child: Container(
-                  width: 128,
-                  height: 128,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(100, 0, 0, 0),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: SpinKitThreeBounce(
-                    size: 32,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-              );
-            }
-          },
+              ],
+            ),
+          ),
         ),
       ),
     );

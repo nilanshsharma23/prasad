@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:prasad/pages/image_preview.dart';
+import 'package:prasad/utils/classes/globals.dart';
+import 'package:prasad/utils/functions/show_error_dialog.dart';
+import 'package:prasad/utils/functions/vendors/add_rating.dart';
 import 'package:prasad/utils/functions/vendors/get_vendor_details.dart';
 import 'package:prasad/utils/functions/vendors/get_vendor_images.dart';
 import 'package:prasad/utils/widgets/primary_button.dart';
@@ -164,6 +167,71 @@ class _KnowMorePageState extends State<KnowMorePage> {
                               },
                             ),
                           ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadiusGeometry.circular(8),
+                              ),
+                            ),
+                            onPressed: () async {
+                              if (Globals.supabase.auth.currentUser == null) {
+                                showErrorDialog(
+                                  context,
+                                  "You have to be signed in to rate the vendor.",
+                                );
+
+                                return;
+                              }
+
+                              await showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text("Rate ${snapshot.data!.name}"),
+                                    content: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: RatingBar.builder(
+                                        itemBuilder: (context, index) => Icon(
+                                          Icons.star,
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.onSurface,
+                                        ),
+                                        onRatingUpdate: (rating) async {
+                                          await addRating(
+                                            snapshot.data!.ratings,
+                                            snapshot.data!.uid,
+                                            rating,
+                                          );
+
+                                          if (context.mounted) {
+                                            Navigator.pop(context);
+                                          }
+                                        },
+                                        itemSize: 50,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+
+                              setState(() {});
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.add, size: 32),
+                                Text(
+                                  "Rate ${snapshot.data!.name}",
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 32),
                       ],
                     ),
                   ),
