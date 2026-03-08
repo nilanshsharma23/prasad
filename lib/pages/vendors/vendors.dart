@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
+import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/functions/vendors/get_vendors_nearby.dart';
 import 'package:prasad/utils/widgets/barriers/location_permission_screen.dart';
@@ -31,7 +32,7 @@ class VendorsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Vendors Near Me",
+                  AppLocalizations.of(context)!.vendorsNearMe,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
                 ),
                 FutureBuilder(

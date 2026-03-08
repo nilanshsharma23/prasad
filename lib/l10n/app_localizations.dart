@@ -469,6 +469,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Prasad brings an age-old tradition into the modern age. Because doing good and eating well shouldn\'t be complicated.'**
   String get whyPrasadDescription;
+
+  /// No description provided for @vendorsNearMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Vendors Near Me'**
+  String get vendorsNearMe;
+
+  /// No description provided for @services.
+  ///
+  /// In en, this message translates to:
+  /// **'Services'**
+  String get services;
+
+  /// No description provided for @images.
+  ///
+  /// In en, this message translates to:
+  /// **'Images'**
+  String get images;
+
+  /// No description provided for @ratings.
+  ///
+  /// In en, this message translates to:
+  /// **'Ratings'**
+  String get ratings;
+
+  /// No description provided for @noRatings.
+  ///
+  /// In en, this message translates to:
+  /// **'No Ratings'**
+  String get noRatings;
 }
 
 class _AppLocalizationsDelegate

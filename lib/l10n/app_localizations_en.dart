@@ -203,4 +203,19 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get whyPrasadDescription =>
       'Prasad brings an age-old tradition into the modern age. Because doing good and eating well shouldn\'t be complicated.';
+
+  @override
+  String get vendorsNearMe => 'Vendors Near Me';
+
+  @override
+  String get services => 'Services';
+
+  @override
+  String get images => 'Images';
+
+  @override
+  String get ratings => 'Ratings';
+
+  @override
+  String get noRatings => 'No Ratings';
 }

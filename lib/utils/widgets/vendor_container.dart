@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/utils/classes/vendor_object.dart';
 import 'package:prasad/utils/functions/helpers/get_average_rating.dart';
 import 'package:prasad/utils/functions/helpers/get_distance_between.dart';
@@ -87,7 +88,7 @@ class VendorContainer extends StatelessWidget {
                 spacing: 4,
                 children: [
                   Text(
-                    "Services",
+                    AppLocalizations.of(context)!.services,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   Column(
@@ -117,8 +118,8 @@ class VendorContainer extends StatelessWidget {
             ),
             Text(
               vendorObject.ratings.isNotEmpty
-                  ? "${vendorObject.ratings.length} ratings"
-                  : "No ratings",
+                  ? "${vendorObject.ratings.length} ${AppLocalizations.of(context)!.ratings}"
+                  : AppLocalizations.of(context)!.ratings,
               style: TextStyle(fontSize: 16),
             ),
             PrimaryButton(

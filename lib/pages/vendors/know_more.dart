@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:prasad/l10n/app_localizations.dart';
 import 'package:prasad/pages/image_preview.dart';
 import 'package:prasad/utils/classes/globals.dart';
 import 'package:prasad/utils/functions/show_error_dialog.dart';
@@ -47,7 +48,7 @@ class _KnowMorePageState extends State<KnowMorePage> {
                           style: TextStyle(fontSize: 16),
                         ),
                         Text(
-                          "Services",
+                          AppLocalizations.of(context)!.services,
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -66,73 +67,88 @@ class _KnowMorePageState extends State<KnowMorePage> {
                             },
                           ),
                         ),
-                        Text(
-                          "Images",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
                         FutureBuilder(
                           future: getVendorImages(uid: widget.uid),
                           builder: (context, imageSnapshot) {
-                            if (imageSnapshot.hasData) {
-                              return SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  spacing: 16,
-                                  children: List.generate(
-                                    imageSnapshot.data!.length,
-                                    (index) => InkWell(
-                                      radius: 8,
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => ImagePreview(
-                                              images: imageSnapshot.data!,
+                            if (!imageSnapshot.hasData) {
+                              return SizedBox(
+                                width: 100,
+                                height: 100,
+                                child: Center(
+                                  child: SpinKitChasingDots(
+                                    size: 32,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
+                                  ),
+                                ),
+                              );
+                            }
+
+                            if (imageSnapshot.data!.isEmpty) {
+                              return SizedBox();
+                            }
+
+                            return Column(
+                              spacing: 16,
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context)!.images,
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    spacing: 16,
+                                    children: List.generate(
+                                      imageSnapshot.data!.length,
+                                      (index) => InkWell(
+                                        radius: 8,
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ImagePreview(
+                                                    images: imageSnapshot.data!,
+                                                  ),
                                             ),
-                                          ),
-                                        );
-                                      },
-                                      child: SizedBox(
-                                        height: 256,
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                            8,
-                                          ),
-                                          child: Image.memory(
-                                            imageSnapshot.data![index],
+                                          );
+                                        },
+                                        child: SizedBox(
+                                          height: 256,
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                              8,
+                                            ),
+                                            child: Image.memory(
+                                              imageSnapshot.data![index],
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              );
-                            }
-
-                            return SizedBox(
-                              width: 100,
-                              height: 100,
-                              child: Center(
-                                child: SpinKitChasingDots(
-                                  size: 32,
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
-                              ),
+                              ],
                             );
                           },
                         ),
                         Text(
-                          "Ratings",
+                          AppLocalizations.of(context)!.ratings,
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         if (snapshot.data!.ratings.isEmpty)
-                          Text("No Ratings", style: TextStyle(fontSize: 24)),
+                          Text(
+                            AppLocalizations.of(context)!.noRatings,
+                            style: TextStyle(fontSize: 24),
+                          ),
                         if (snapshot.data!.ratings.isNotEmpty)
                           Column(
                             spacing: 16,
@@ -180,7 +196,7 @@ class _KnowMorePageState extends State<KnowMorePage> {
                               if (Globals.supabase.auth.currentUser == null) {
                                 showErrorDialog(
                                   context,
-                                  "You have to be signed in to rate the vendor.",
+                                  AppLocalizations.of(context)!.needToSignIn,
                                 );
 
                                 return;

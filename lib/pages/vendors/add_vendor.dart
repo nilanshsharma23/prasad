@@ -138,7 +138,7 @@ class _AddVendorPageState extends State<AddVendorPage> {
                       },
                     ),
                     Text(
-                      "Services",
+                      AppLocalizations.of(context)!.services,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -357,8 +357,8 @@ class _AddVendorPageState extends State<AddVendorPage> {
                         labelText: "Enter Desciption (Optional)",
                       ),
                       keyboardType: TextInputType.multiline,
+                      maxLines: null,
                       minLines: 4,
-                      maxLines: 6,
                     ),
                     SizedBox(
                       width: double.infinity,

@@ -123,5 +123,15 @@
     "whyPrasad": "Why Prasad?",
     "@whyPrasad": {},
     "whyPrasadDescription": "Prasad brings an age-old tradition into the modern age. Because doing good and eating well shouldn't be complicated.",
-    "@whyPrasadDescription": {}
+    "@whyPrasadDescription": {},
+    "vendorsNearMe": "Vendors Near Me",
+    "@vendorsNearMe": {},
+    "services": "Services",
+    "@services": {},
+    "images": "Images",
+    "@images": {},
+    "ratings": "Ratings",
+    "@ratings": {},
+    "noRatings": "No Ratings",
+    "@noRatings": {}
 }

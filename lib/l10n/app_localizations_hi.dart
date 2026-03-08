@@ -201,4 +201,19 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get whyPrasadDescription =>
       'प्रसाद एक पुरानी परंपरा को आधुनिक युग में लाता है। क्योंकि अच्छा काम करना और अच्छा खाना मुश्किल नहीं होना चाहिए।';
+
+  @override
+  String get vendorsNearMe => 'मेरे पास व्यापारी';
+
+  @override
+  String get services => 'सेवाएं';
+
+  @override
+  String get images => 'इमेजिस';
+
+  @override
+  String get ratings => 'रेटिंग';
+
+  @override
+  String get noRatings => 'कोई रेटिंग नहीं';
 }

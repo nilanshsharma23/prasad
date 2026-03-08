@@ -6,7 +6,7 @@ class ColorSchemeProvider extends ChangeNotifier {
   ColorScheme currentColorScheme =
       ColorSchemes.colorSchemeList[Globals.currentColorScheme];
 
-  setColorScheme(ColorScheme colorScheme) {
+  void setColorScheme(ColorScheme colorScheme) {
     currentColorScheme = colorScheme;
     notifyListeners();
   }
