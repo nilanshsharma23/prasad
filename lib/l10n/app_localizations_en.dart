@@ -107,6 +107,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enterMobileNumber => 'Enter Your Mobile Number';
 
   @override
+  String get enterEmail => 'Enter Your E-mail';
+
+  @override
+  String get enterPassword => 'Enter Your Password';
+
+  @override
+  String get invalidEmail => 'Invalid Email';
+
+  @override
+  String get wrongPassword => 'Wrong Password';
+
+  @override
   String get tenDigitMobileNumber => 'Mobile number should be 10 digits';
 
   @override

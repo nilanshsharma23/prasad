@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
@@ -60,12 +61,10 @@ class _SignInPageState extends State<SignInPage> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          labelText: AppLocalizations.of(
-                            context,
-                          )!.enterMobileNumber,
+                          labelText: AppLocalizations.of(context)!.enterEmail,
                         ),
                         controller: mobileNumberController,
-                        keyboardType: TextInputType.phone,
+                        keyboardType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return AppLocalizations.of(
@@ -73,10 +72,29 @@ class _SignInPageState extends State<SignInPage> {
                             )!.pleaseEnterSomething;
                           }
 
-                          if (value.length != 10) {
+                          if (!EmailValidator.validate(value)) {
+                            return AppLocalizations.of(context)!.invalidEmail;
+                          }
+
+                          return null;
+                        },
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          labelText: AppLocalizations.of(
+                            context,
+                          )!.enterPassword,
+                        ),
+                        controller: mobileNumberController,
+                        keyboardType: TextInputType.visiblePassword,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
                             return AppLocalizations.of(
                               context,
-                            )!.tenDigitMobileNumber;
+                            )!.pleaseEnterSomething;
                           }
 
                           return null;
@@ -108,20 +126,20 @@ class _SignInPageState extends State<SignInPage> {
                               curve: Curves.bounceInOut,
                             );
 
-                            setState(() {
-                              otpController =
-                                  OTPTextEditController(
-                                    codeLength: 6,
-                                    onCodeReceive: (code) {
-                                      setState(() {
-                                        otpController.text = code;
-                                      });
-                                    },
-                                  )..startListenUserConsent((code) {
-                                    final exp = RegExp(r'(\d{6})');
-                                    return exp.stringMatch(code ?? '') ?? '';
-                                  });
-                            });
+                            // setState(() {
+                            //   otpController =
+                            //       OTPTextEditController(
+                            //         codeLength: 6,
+                            //         onCodeReceive: (code) {
+                            //           setState(() {
+                            //             otpController.text = code;
+                            //           });
+                            //         },
+                            //       )..startListenUserConsent((code) {
+                            //         final exp = RegExp(r'(\d{6})');
+                            //         return exp.stringMatch(code ?? '') ?? '';
+                            //       });
+                            // });
                           },
                           text: AppLocalizations.of(context)!.sendOTP,
                         ),

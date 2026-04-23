@@ -290,6 +290,30 @@ abstract class AppLocalizations {
   /// **'Enter Your Mobile Number'**
   String get enterMobileNumber;
 
+  /// No description provided for @enterEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Your E-mail'**
+  String get enterEmail;
+
+  /// No description provided for @enterPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Your Password'**
+  String get enterPassword;
+
+  /// No description provided for @invalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid Email'**
+  String get invalidEmail;
+
+  /// No description provided for @wrongPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong Password'**
+  String get wrongPassword;
+
   /// No description provided for @tenDigitMobileNumber.
   ///
   /// In en, this message translates to:

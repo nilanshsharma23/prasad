@@ -106,6 +106,18 @@ class AppLocalizationsHi extends AppLocalizations {
   String get enterMobileNumber => 'फोन नंबर डालें';
 
   @override
+  String get enterEmail => 'ई-मेल डालें';
+
+  @override
+  String get enterPassword => 'पासवर्ड डालें';
+
+  @override
+  String get invalidEmail => 'अमान्य ई-मेल';
+
+  @override
+  String get wrongPassword => 'गलत पासवर्ड';
+
+  @override
   String get tenDigitMobileNumber => 'फ़ोन नंबर 10 अक्षरों का होना चाहिए';
 
   @override
