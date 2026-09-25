@@ -18,7 +18,7 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  GlobalKey<FormState> phoneNumberFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> emailFormKey = GlobalKey<FormState>();
   GlobalKey<FormState> otpFormKey = GlobalKey<FormState>();
   GlobalKey<FormState> nameFormKey = GlobalKey<FormState>();
 
@@ -43,7 +43,7 @@ class _SignInPageState extends State<SignInPage> {
               physics: NeverScrollableScrollPhysics(),
               children: [
                 Form(
-                  key: phoneNumberFormKey,
+                  key: emailFormKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +104,7 @@ class _SignInPageState extends State<SignInPage> {
                         width: double.infinity,
                         child: PrimaryButton(
                           onPressed: () async {
-                            if (!phoneNumberFormKey.currentState!.validate()) {
+                            if (!emailFormKey.currentState!.validate()) {
                               return;
                             }
 
