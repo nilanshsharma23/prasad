@@ -46,3 +46,26 @@ app.*.map.json
 
 /supabase/functions/service-account.json
 *.env
+
+.firebase/
+*.log
+.firebaserc
+firebase.json
+
+# FlutterFire auto-generated options file (contains API keys)
+lib/firebase_options.dart
+
+# Android Firebase configuration
+android/app/google-services.json
+**/google-services.json
+
+# iOS & macOS Firebase configuration
+ios/Runner/GoogleService-Info.plist
+macos/Runner/GoogleService-Info.plist
+**/GoogleService-Info.plist
+
+# Firebase Crashlytics & App ID tracking files
+ios/firebase_app_id_file.json
+macos/firebase_app_id_file.json
+android/app/firebase_app_id_file.json
+**/firebase_app_id_file.json
